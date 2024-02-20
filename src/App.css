@@ -1,0 +1,75 @@
+.home {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 800px;
+}
+/** haeder */
+.title_box {
+  width: 800px;
+  background-color: rgb(239, 239, 239);
+  border-radius: 3px;
+}
+
+.title_box .logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.title_box .title {
+  font-size: xx-large;
+  font-weight: bold;
+  padding: 20px 0 15px 0;
+}
+
+.title_box .text {
+  padding: 0 0 15px 0;
+}
+
+/** 본문 */
+.container {
+  margin-top: 50px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 10px;
+  row-gap: 50px;
+}
+
+.desk {
+  max-width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.desk:hover {
+  cursor: pointer;
+}
+
+.desk::after {
+  content: "";
+  border: 1px solid rgb(203, 199, 199);
+  width: 150px;
+  height: 150px;
+  border-radius: 3px;
+  position: absolute;
+}
+
+.desk .photo {
+  position: relative;
+  top: -35px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: blue;
+  z-index: 1;
+}
+
+.desk .intern {
+  position: relative;
+  top: -10px;
+  z-index: 1;
+}
