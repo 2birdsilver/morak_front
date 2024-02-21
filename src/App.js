@@ -1,8 +1,9 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
-import Detail from './pages/Detail';
+// import Detail from './pages/Detail';
+import Memo from './pages/Memo';
 
 function App() {
   return (
@@ -12,11 +13,13 @@ function App() {
           path='/'
           element={<Home />}
         />
-        <Route
+        {/* <Route
           path='/intern' 
           element={<Detail />}
-        />
+        /> */}
+         <Route path="/memo/:id" element={<Memo />} />
       </Routes>
+      
     </BrowserRouter>
   );
 }
