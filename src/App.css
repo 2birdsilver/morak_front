@@ -128,3 +128,68 @@ Home.js
 }
 
 /** postit */
+.back-btn {
+  position:absolute;
+  top: 30px;
+  left: 30px;
+  padding: 10px 20px;
+  background-color: white;
+  border: 1px solid rgb(209, 203, 203);
+}
+.back-btn:hover {
+  cursor: pointer;
+}
+
+.post-form-container {
+  max-width: 600px;
+  margin-top: 100px;
+  padding: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group textarea {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group textarea {
+  resize: vertical; /* 사용자가 수직 방향으로 크기 조정 가능 */
+}
+
+.form-buttons {
+  text-align: right;
+}
+
+.p-btn {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  background-color: rgb(165, 168, 172);
+}
+
+.add-btn {
+  background-color: #007bff;
+}
+
+.add-btn:hover {
+  background-color: #0056b3;
+}
