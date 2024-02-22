@@ -19,7 +19,7 @@ function Home() {
     }, []);
 
     return (
-      <div className="home">
+      <div className="wrap">
         <div className='title_box'>
           <div className='logo'>KCC정보통신</div>
           <div className='title'>Happy Desk</div>

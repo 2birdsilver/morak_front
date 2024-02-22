@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import keyboard from '../images/keyword.png';
+import mouse from '../images/mouse.png';
 
 function Memo() {
   const { id } = useParams();
@@ -28,7 +30,7 @@ function Memo() {
 
   // 메모 작성 페이지로 이동하는 함수
   const goToCreateMemo = () => {
-    navigate(`/create-memo/${id}`);
+    navigate(`/postit/${id}`);
   };
 
   // 홈 페이지로 이동하는 함수
@@ -37,8 +39,13 @@ function Memo() {
   };
 
   return (
-    <div>
+    <div className='wrap memo'>
       <h2>{name}에게 포스트잇을 붙여봐!</h2>
+      <div className='btns'>
+        <button className='btn' onClick={goToCreateMemo}>📝 Memo</button>
+        <button className='btn' onClick={goToHome}>🏠 Home</button>  
+      </div>
+
       {memos.length > 0 ? (
         <ul>
           {memos.map(memo => (
@@ -46,10 +53,20 @@ function Memo() {
           ))}
         </ul>
       ) : (
-        <p>{name}님께 첫 번째 메모를 남겨보세요!!</p>
+        <div>{name}님께 첫 번째 메모를 남겨보세요!</div>
       )}
-      <button onClick={goToCreateMemo}>메모 작성</button>
-      <button onClick={goToHome}>Home</button>
+
+    <div className='place'>
+      <div className="notebook">
+        </div>
+        <div className='km'>
+          <img className='keyboard' src={keyboard} />
+          <img className='mouse' src={mouse} />
+      </div>
+    </div>
+    
+
+
     </div>
   );
 }

@@ -4,6 +4,7 @@ import './App.css';
 import Home from './pages/Home';
 // import Detail from './pages/Detail';
 import Memo from './pages/Memo';
+import Postit from './pages/Postit';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           element={<Detail />}
         /> */}
          <Route path="/memo/:id" element={<Memo />} />
+         <Route path="/postit/:id" element={<Postit />} />
       </Routes>
       
     </BrowserRouter>
