@@ -15,6 +15,8 @@ function Postit() {
         const [password, setPassword] = useState('');
         const [content, setContent] = useState('');
         const [isEditing, setIsEditing] = useState(false);
+        const [recipient, setRecipient] = useState(false);
+        const [memoId, setMemoId] = useState(false);
 
 
      useEffect(() => {
@@ -28,9 +30,12 @@ function Postit() {
                          const { writer, content } = res.data;
                          setWriter(writer);
                          setContent(content);
+                         setMemoId(params.id);
                          // 비밀번호 관련 처리는 상황에 따라 다름
                      })
                      .catch((err) => console.error("Error fetching memo data:", err));
+             } else {
+                setRecipient(params.id)
              }
      }, [params.id, location.search]);
 
@@ -39,7 +44,7 @@ function Postit() {
 
             const memoData = {
                 writer,
-//                recipient: params.id,
+                recipient,
                 content,
                 password,
                 shape: "square",
@@ -49,7 +54,7 @@ function Postit() {
             if (isEditing) {
                 // 수정 로직
                 axios
-                    .put("/memo", memoData)
+                    .put(`/memo/${memoId}`, memoData)
                     .then((res) => {
                         alert("포스트잇 수정 완료");
                         navigate(-1); // 또는 수정 후 보여줄 페이지로 이동
