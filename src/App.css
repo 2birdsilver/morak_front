@@ -20,6 +20,7 @@
 .title_box .title {
   font-size: xx-large;
   font-weight: bold;
+  font-family: "LOTTERIACHAB";
   padding: 20px 0 15px 0;
 }
 
@@ -68,6 +69,7 @@
   border-radius: 50%;
   background-color: blue;
   z-index: 1;
+  border: 1px solid rgb(203, 199, 199);
 }
 
 .member .intern {
@@ -79,6 +81,11 @@
 .intern .intern_name {
   font-weight: bold;
 }
+
+.intern .intern_intro {
+  margin: 0 15px;
+}
+
 
 /***** Memo.js css *****/
 
