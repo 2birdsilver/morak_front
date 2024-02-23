@@ -20,11 +20,6 @@ function Home() {
 
     return (
       <div className="wrap">
-        <div className='title_box'>
-          <div className='logo'>KCC정보통신</div>
-          <div className='title'>Happy Desk</div>
-          <div className='text'>책상을 클릭한 후 포스트잇에 메모를 남겨보세요!</div>
-        </div>
         <div className='container'>
           {members.map((member) => (
             <Desk key={member.id} member={member} onClick={() => goToMemos(member)} />
