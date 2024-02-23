@@ -4,6 +4,7 @@ import keyboard from '../images/keyword.png';
 import mouse from '../images/mouse.png';
 import Modal from '../components/MemoDetail';
 import '../MemoDetail.css';
+import axios from "axios";
 
 
 function Memo() {
@@ -38,7 +39,7 @@ function Memo() {
 
   // 메모 작성 페이지로 이동하는 함수
   const goToCreateMemo = () => {
-    navigate(`/postit/${id}`);
+    navigate(`/postit/${id}/`);
   };
 
   // 홈 페이지로 이동하는 함수
@@ -62,10 +63,24 @@ function Memo() {
   };
 
   // 메모 수정 페이지로 이동하는 함수
-  const handleEditClick = () => {
-    navigate(`/postit/${id}`);
-    setIsModalOpen(false);
-  };
+const handleEditClick = () => {
+  navigate(`/postit/${editingMemoId}?edit=true`);
+  setIsModalOpen(false);
+};
+
+// 메모 삭제 함수
+const handleDeleteClick = (memoId) => {
+  axios.delete(`/memo/${memoId}`)
+    .then(() => {
+      alert("메모가 삭제되었습니다.");
+      setIsModalOpen(false); // 모달 닫기
+      setMemos(memos.filter(memo => memo.id !== memoId)); // 삭제된 메모를 목록에서 제거
+    })
+    .catch(error => {
+      console.error("메모 삭제 중 에러 발생:", error);
+      alert("메모 삭제에 실패했습니다.");
+    });
+};
 
 
 
@@ -103,6 +118,7 @@ function Memo() {
           className={`MemoDetail-content ${modalShape === 'heart' ? 'heart' : ''}`}
           content={modalContent}
           onClose={closeModal}
+          onDelete={() => handleDeleteClick(editingMemoId)}
           onEdit={() => handleEditClick(editingMemoId)}
         />
       )}
