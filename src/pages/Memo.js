@@ -71,7 +71,7 @@ function Memo() {
 
 
   return (
-    <div className='wrap memo'>
+    <div className='wrap'>
       <h2>{name}에게 포스트잇을 붙여봐!</h2>
       <div className='btns'>
         <button className='btn' onClick={goToCreateMemo}>📝 Memo</button>
@@ -88,7 +88,8 @@ function Memo() {
                 key={memo.id}
                 onClick={() => handleMemoClick(memo)}
               >
-                <p>{memo.writer}</p>
+                <div className='writer'>{memo.writer}</div>
+                <div className='content'>{memo.content}</div>
               </div>
             ))}
           </div>
