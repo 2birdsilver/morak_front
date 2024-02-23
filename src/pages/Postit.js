@@ -1,48 +1,58 @@
 import React, { useState } from 'react';
-import { useNavigate  } from 'react-router-dom'
+import { useNavigate, useParams  } from 'react-router-dom';
+import axios from "axios";
 
 function Postit() {
 
+    const params = useParams();
     const navigate = useNavigate();
     const goback = () => {
         navigate(-1);
       };
 
-    const [title, setTitle] = useState('');
-    const [nickname, setNickname] = useState('');
+    const [writer, setWriter] = useState('');
     const [password, setPassword] = useState('');
     const [content, setContent] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); // 폼 제출 시 페이지 새로고침 방지
-        // 폼 제출 로직 처리, 예: API 호출 등
-        console.log({ title, nickname, password, content });
-    };
+
+    const handlePostitSubmit = async (e) => {
+        e.preventDefault();
+
+        const memoData = {
+            writer: writer,
+            recipient: params.id,
+            content:content,
+            password:password,
+            shape: "square",
+            color: "white"
+        }
+
+        axios
+            .post("/memo", memoData)
+            .then((res) => {
+                alert("포스트잇 등록 완료");
+                navigate(-1);
+            })
+            .catch((err) => {
+                alert("포스트잇 등록 실패");
+                console.log(err);
+            })
+    }
 
 
   return (
     <div className='wrap'>
         <button className='back-btn' onClick={goback}>◀ 뒤로가기</button>
         <div className="post-form-container">
-        <form className="post-form" onSubmit={handleSubmit}>
+        <form className="post-form" onSubmit={handlePostitSubmit}>
             <div className="form-group">
-                <label htmlFor="title">제목</label>
-                <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-            </div>
-            <div className="form-group">
-                <label htmlFor="nickname">닉네임</label>
+                <label htmlFor="writer">닉네임</label>
                 <input
                     type="text"
                     id="nickname"
-                    name="nickname"
-                    value={nickname}
-                    onChange={(e) => setNickname(e.target.value)}
+                    name="writer"
+                    value={writer}
+                    onChange={(e) => setWriter(e.target.value)}
                 />
             </div>
             <div className="form-group">
@@ -66,8 +76,8 @@ function Postit() {
                 ></textarea>
             </div>
             <div className="form-buttons">
-                <button type="submit" className="p-btn">삭제</button>
-                <button type="submit" className="p-btn">수정</button>
+                <button className="p-btn">삭제</button>
+                <button className="p-btn">수정</button>
                 <button type="submit" className="p-btn add-btn">등록</button>
             </div>
         </form>
