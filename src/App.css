@@ -3,12 +3,14 @@
   text-align: center;
   margin: 0 auto;
   max-width: 800px;
+  min-height: 100%;
+  padding-bottom: 60px; 
 }
 /* haeder */
 .header {
   text-align: center;
   width: 100%;
-  background-color: rgb(239, 239, 239);
+  background-color: #ffeaa7;
 }
 
 .header .logo {
@@ -30,13 +32,22 @@
 
 /** footer  */
 .footer {
-  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: rgb(239, 239, 239);/* 원하는 배경색상으로 변경하세요 */
-  padding: 20px; /* 적절한 패딩값으로 조정하세요 */
-  text-align: center; /* 텍스트를 가운데 정렬하거나 필요에 맞게 변경하세요 */
+  height: 80px;
+  background-color:#ffeaa7;
+  padding: 20px; 
+  text-align: left;
+}
+
+.footer .text {
+  margin: 3px;
 }
 
 /** 본문 */
@@ -49,9 +60,16 @@
   row-gap: 50px;
 }
 
+/* 모바일 사이즈 */
+@media screen and (max-width: 760px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 /******  Desk.js *****/
 .member {
-  max-width: 150px;
+  min-width: 80px;
   height: 150px;
   display: flex;
   flex-direction: column;
@@ -70,6 +88,13 @@
   height: 150px;
   border-radius: 3px;
   position: absolute;
+}
+
+/* 모바일 사이즈 */
+@media screen and (max-width: 760px) {
+  .member::after {
+    min-width: 125px;
+  }
 }
 
 .member .photo {
@@ -98,6 +123,13 @@
   height: 50px;
 }
 
+/* 모바일 사이즈 */
+@media screen and (max-width: 760px) {
+  .intern .intern_intro {
+    width: 100px;
+  }
+}
+
 
 /***** Memo.js css *****/
 
@@ -117,6 +149,7 @@
   border: 1px solid #4C2A2A;
   border-radius: 5px;
   color: white;
+  font-family: "omyu-pretty";
 }
 
 .btn:hover {
@@ -158,6 +191,8 @@
   padding: 10px 20px;
   background-color: white;
   border: 1px solid rgb(209, 203, 203);
+  border-radius: 5px;
+  font-family: "omyu-pretty";
 }
 .back-btn:hover {
   cursor: pointer;
