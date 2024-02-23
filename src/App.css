@@ -1,12 +1,10 @@
-/** 
-Home.js
-*/
+/******  Home.js *****/
 .wrap {
   text-align: center;
   margin: 0 auto;
   max-width: 800px;
 }
-/** haeder */
+/* haeder */
 .title_box {
   width: 800px;
   background-color: rgb(239, 239, 239);
@@ -39,7 +37,8 @@ Home.js
   row-gap: 50px;
 }
 
-.desk {
+/******  Desk.js *****/
+.member {
   max-width: 150px;
   height: 150px;
   display: flex;
@@ -48,11 +47,11 @@ Home.js
   align-items: center;
 }
 
-.desk:hover {
+.member:hover {
   cursor: pointer;
 }
 
-.desk::after {
+.member::after {
   content: "";
   border: 1px solid rgb(203, 199, 199);
   width: 150px;
@@ -61,7 +60,7 @@ Home.js
   position: absolute;
 }
 
-.desk .photo {
+.member .photo {
   position: relative;
   top: -35px;
   width: 80px;
@@ -71,13 +70,18 @@ Home.js
   z-index: 1;
 }
 
-.desk .intern {
+.member .intern {
   position: relative;
   top: -10px;
   z-index: 1;
 }
 
-/** Memo.js css */
+.intern .intern_name {
+  font-weight: bold;
+}
+
+/***** Memo.js css *****/
+
 .memo {
   margin-top: 25px;
   display: flex;
@@ -127,7 +131,7 @@ Home.js
   border-radius: 8px;
 }
 
-/** postit */
+/***** postit.js *****/
 .back-btn {
   position:absolute;
   top: 30px;
