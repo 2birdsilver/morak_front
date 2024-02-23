@@ -96,7 +96,7 @@
 
 @media screen and (max-width: 760px) {
   .member::after {
-    width: 100px;
+    width: 120px;
   }
 }
 
@@ -124,6 +124,7 @@
   height: 50px;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 0 15px;
 }
 
@@ -136,9 +137,17 @@
 
 
 /***** Memo.js css *****/
+.memo {
+  height: 800px;
+}
 
 .writer {
   font-weight: bold;
+}
+
+.empty-message {
+  margin-top: 20px;
+  color: white;
 }
 
 .note.square {

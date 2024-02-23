@@ -86,7 +86,7 @@ const handleDeleteClick = (memoId) => {
 
 
   return (
-    <div className='wrap'>
+    <div className='wrap memo'>
       <h2>{name}에게 포스트잇을 붙여봐!</h2>
       <div className='btns'>
         <button className='btn' onClick={goToCreateMemo}>📝 Memo</button>

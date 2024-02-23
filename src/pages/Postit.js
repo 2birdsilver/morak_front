@@ -80,7 +80,7 @@ function Postit() {
 
 
   return (
-          <div className='wrap'>
+          <div className='wrap memo'>
               <button className='back-btn' onClick={goback}>◀ 뒤로가기</button>
               <div className="post-form-container">
                   <form className="post-form" onSubmit={handlePostitSubmit}>
