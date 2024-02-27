@@ -1,8 +1,13 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+import '../src/css/Desk.css';
+import '../src/css/Footer.css';
+import '../src/css/Header.css';
+import '../src/css/Home.css';
+import '../src/css/Memo.css';
+import '../src/css/Postit.css';
 import Home from './pages/Home';
-// import Detail from './pages/Detail';
 import Memo from './pages/Memo';
 import Postit from './pages/Postit';
 import Header from './components/Header';

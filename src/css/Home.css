@@ -1,0 +1,16 @@
+.container {
+  margin-top: 50px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 10px;
+  row-gap: 50px;
+}
+
+/* 모바일 사이즈 */
+@media screen and (max-width: 760px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+  }
+}
