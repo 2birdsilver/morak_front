@@ -72,6 +72,9 @@ const handleEditClick = () => {
 
 // 메모 삭제 함수
 /*const handleDeleteClick = (memoId) => {
+=======
+const handleDeleteClick = (memoId) => {
+>>>>>>> d8451e20264f4240866926c6bec064ba67cbb172
   axios.delete(`/memo/${memoId}`)
     .then(() => {
       alert("메모가 삭제되었습니다.");
@@ -82,6 +85,7 @@ const handleEditClick = () => {
       console.error("메모 삭제 중 에러 발생:", error);
       alert("메모 삭제에 실패했습니다.");
     });
+<<<<<<< HEAD
 };*/
 
   // 메모 삭제 함수 수정
