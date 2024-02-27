@@ -1,0 +1,62 @@
+.member {
+    min-width: 80px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .member:hover {
+    cursor: pointer;
+  }
+  
+  .member::after {
+    content: "";
+    border: 1px solid rgb(203, 199, 199);
+    width: 150px;
+    height: 150px;
+    border-radius: 3px;
+    position: absolute;
+  }
+  
+  @media screen and (max-width: 760px) {
+    .member::after {
+      width: 120px;
+    }
+  }
+  
+  .member .photo {
+    position: relative;
+    top: -35px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    z-index: 1;
+    border: 1px solid rgb(203, 199, 199);
+  }
+  
+  .member .intern {
+    position: relative;
+    top: -10px;
+    z-index: 1;
+  }
+  
+  .intern .intern_name {
+    font-weight: bold;
+  }
+  
+  .intern .intern_intro {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+  }
+  
+  /* 모바일 사이즈 */
+  @media screen and (max-width: 760px) {
+    .intern .intern_intro {
+      width: 100px;
+    }
+  }

@@ -1,0 +1,37 @@
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './App.css';
+import '../src/css/Desk.css';
+import '../src/css/Footer.css';
+import '../src/css/Header.css';
+import '../src/css/Home.css';
+import '../src/css/Memo.css';
+import '../src/css/Postit.css';
+import Home from './pages/Home';
+import Memo from './pages/Memo';
+import Postit from './pages/Postit';
+import Header from './components/Header';
+import Footer from './components/Footer';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route 
+          path='/'
+          element={<Home />}
+        />
+        {/* <Route
+          path='/intern' 
+          element={<Detail />}
+        /> */}
+         <Route path="/memo/:id" element={<Memo />} />
+         <Route path="/postit/:id" element={<Postit />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
+  );
+}
+
+export default App;

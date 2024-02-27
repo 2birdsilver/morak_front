@@ -1,0 +1,27 @@
+.header {
+    text-align: center;
+    width: 100%;
+    background-color: #ffeaa7;
+  }
+  
+  
+  .header .logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+
+  .header .title:hover {
+    cursor: pointer;
+    color: #4C2A2A;
+  }
+  
+  .header .title {
+    font-size: xx-large;
+    font-family: "LOTTERIACHAB";
+    padding: 25px 0 15px 0;
+  }
+
+  .header .text {
+    padding: 0 0 15px 0;
+  }
