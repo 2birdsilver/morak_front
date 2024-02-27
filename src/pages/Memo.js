@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import keyboard from '../images/keyword.png';
 import mouse from '../images/mouse.png';
 import Modal from '../components/MemoDetail';
+import PasswordModal from '../components/PasswordModal';
 import '../MemoDetail.css';
 import axios from "axios";
 
@@ -16,6 +17,7 @@ function Memo() {
   const [modalContent, setModalContent] = useState(''); // 모달에 표시될 내용 관리
   const [modalShape, setModalShape] = useState('');  // 모달 모양(디자인) 상태 관리
   const [editingMemoId, setEditingMemoId] = useState(null);//수정 상태 관리
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
 
   useEffect(() => {
@@ -69,7 +71,7 @@ const handleEditClick = () => {
 };
 
 // 메모 삭제 함수
-const handleDeleteClick = (memoId) => {
+/*const handleDeleteClick = (memoId) => {
   axios.delete(`/memo/${memoId}`)
     .then(() => {
       alert("메모가 삭제되었습니다.");
@@ -80,6 +82,47 @@ const handleDeleteClick = (memoId) => {
       console.error("메모 삭제 중 에러 발생:", error);
       alert("메모 삭제에 실패했습니다.");
     });
+};*/
+
+  // 메모 삭제 함수 수정
+  const handleDeleteClick = (memoId) => {
+    setIsPasswordModalOpen(true);
+    setEditingMemoId(memoId);
+  };
+
+  // 비밀번호 모달에서 확인을 눌렀을 때 실행될 함수
+const handlePasswordConfirm = async (password) => {
+  console.log("입력된 비밀번호:", password);
+  console.log("입력된 메모id:", editingMemoId);
+  // 비밀번호와 메모 ID를 서버에 전송
+  try {
+    const response = await fetch(`http://localhost:8080/memo/delete`, {
+      method: 'POST', // 메소드를 DELETE로 변경
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        memoId: editingMemoId, // 삭제하려는 메모의 ID
+        password: password, // 사용자가 입력한 비밀번호
+      }),
+    });
+
+    const data = await response.json();
+
+    // 서버에서 응답 받은 후의 처리
+    if (data.success) {
+      alert("메모 삭제 성공");
+      // 메모 삭제 성공 처리 (예: 메모 목록 갱신)
+    } else {
+      alert("메모 삭제 실패");
+      // 메모 삭제 실패 처리 (예: 사용자에게 실패 이유 알림)
+    }
+  } catch (error) {
+    console.error("메모 삭제 요청 중 오류 발생", error);
+    // 네트워크 오류 또는 요청 실패 처리
+  }
+
+  setIsPasswordModalOpen(false); // 비밀번호 입력이 완료되면 모달을 닫음
 };
 
 
@@ -122,6 +165,14 @@ const handleDeleteClick = (memoId) => {
           onEdit={() => handleEditClick(editingMemoId)}
         />
       )}
+
+      {isPasswordModalOpen && (
+              <PasswordModal
+                isOpen={isPasswordModalOpen}
+                onClose={() => setIsPasswordModalOpen(false)}
+                onConfirm={handlePasswordConfirm}
+              />
+            )}
 
       {/* 키보드와 마우스 이미지 */}
       <div className='km'>
