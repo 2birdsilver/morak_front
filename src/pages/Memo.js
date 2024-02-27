@@ -104,7 +104,6 @@ const handleDeleteClick = (memoId) => {
                 onClick={() => handleMemoClick(memo)}
               >
                 <div className='writer'>{memo.writer}</div>
-                <div className='content'>{memo.content}</div>
               </div>
             ))}
           </div>
