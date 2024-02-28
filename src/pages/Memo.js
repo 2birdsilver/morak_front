@@ -111,20 +111,22 @@ const handlePasswordConfirm = async (password) => {
       }),
     });
 
-    const data = await response.json();
+      if (response.status === 202) {
+        alert("메모 삭제 성공");
+        closeModal();
+        window.location.reload();
 
-    // 서버에서 응답 받은 후의 처리
-    if (data.success) {
-      alert("메모 삭제 성공");
-      // 메모 삭제 성공 처리 (예: 메모 목록 갱신)
-    } else {
-      alert("메모 삭제 실패");
-      // 메모 삭제 실패 처리 (예: 사용자에게 실패 이유 알림)
+      } else if (response.status === 401) {
+        alert("메모 삭제 실패");
+      } else {
+        // 그 외의 경우, 일반적인 에러 처리
+        alert("메모 삭제 실패: 알 수 없는 에러 발생");
+      }
+    } catch (error) {
+      console.error("메모 삭제 요청 중 오류 발생", error);
+      alert("메모 삭제 과정에서 오류가 발생했습니다.");
+      // 네트워크 오류 또는 요청 실패 처리
     }
-  } catch (error) {
-    console.error("메모 삭제 요청 중 오류 발생", error);
-    // 네트워크 오류 또는 요청 실패 처리
-  }
 
   setIsPasswordModalOpen(false); // 비밀번호 입력이 완료되면 모달을 닫음
 };
