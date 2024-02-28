@@ -115,11 +115,11 @@ const handlePasswordConfirm = async (password) => {
     });
 
       if (response.status === 202) {
-        alert("메모 삭제 성공");
+        alert("메모를 삭제하였습니다.");
         closeModal();
         setMemos(memos.filter(memo => memo.id !== editingMemoId));
       } else if (response.status === 401) {
-        alert("메모 삭제 실패");
+        alert("비밀번호를 잘못 입력하였습니다. 비밀번호 문의는 leesu@kcc.co.kr");
       } else {
         // 그 외의 경우, 일반적인 에러 처리
         alert("메모 삭제 실패: 알 수 없는 에러 발생");

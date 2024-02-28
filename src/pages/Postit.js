@@ -29,9 +29,11 @@ function Postit() {
                  setIsEditing(true);
                  axios.get(`/memo/update/${params.id}`)
                      .then((res) => {
-                         const { writer, content } = res.data;
+                         const { writer, content, shape, color } = res.data;
                          setWriter(writer);
                          setContent(content);
+                         setShape(shape);
+                         setColor(color);
                          setMemoId(params.id);
                          // 비밀번호 관련 처리는 상황에 따라 다름
                      })
@@ -58,11 +60,11 @@ function Postit() {
                 axios
                     .put(`/memo/${memoId}`, memoData)
                     .then((res) => {
-                        alert("포스트잇 수정 완료");
+                        alert("포스트잇 수정을 완료하였습니다.");
                         navigate(-1); // 또는 수정 후 보여줄 페이지로 이동
                     })
                     .catch((err) => {
-                        alert("포스트잇 수정 실패");
+                        alert("비밀번호를 잘못 입력하였습니다. 비밀번호 문의는 leesu@kcc.co.kr");
                         console.log(err);
                     });
             } else {
@@ -70,11 +72,11 @@ function Postit() {
                 axios
                             .post("/memo", memoData)
                             .then((res) => {
-                                alert("포스트잇 등록 완료");
+                                alert("포스트잇 등록을 완료하였습니다.");
                                 navigate(-1);
                             })
                             .catch((err) => {
-                                alert("포스트잇 등록 실패");
+                                alert("포스트잇 등록을 실패하였습니다.");
                                 console.log(err);
                             })
             }

@@ -15,7 +15,7 @@ function PasswordModal({ isOpen, onClose, onConfirm }) {
       <div className="password-modal" onClick={(e) => e.stopPropagation()}>
         <input
           type="password"
-          placeholder="비밀번호 입력"
+          placeholder="글작성시 입력했던 비번를 적어주세요."
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
