@@ -100,7 +100,7 @@ const handlePasswordConfirm = async (password) => {
   console.log("입력된 메모id:", editingMemoId);
   // 비밀번호와 메모 ID를 서버에 전송
   try {
-    const response = await fetch("http://localhost:8080/memo/delete", {
+    const response = await fetch('/memo/delete', {
       method: 'POST', // 메소드를 DELETE로 변경
       headers: {
         'Content-Type': 'application/json',
@@ -114,8 +114,7 @@ const handlePasswordConfirm = async (password) => {
       if (response.status === 202) {
         alert("메모 삭제 성공");
         closeModal();
-        window.location.reload();
-
+        setMemos(memos.filter(memo => memo.id !== editingMemoId));
       } else if (response.status === 401) {
         alert("메모 삭제 실패");
       } else {
