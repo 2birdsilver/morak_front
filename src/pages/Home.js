@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Desk from '../components/Desk.js';
 import { useNavigate  } from 'react-router-dom'
-import '../App.css';
 
 function Home() {
     const [members, setMembers] = useState([]);

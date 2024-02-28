@@ -6,6 +6,8 @@ import '../src/css/Footer.css';
 import '../src/css/Header.css';
 import '../src/css/Home.css';
 import '../src/css/Memo.css';
+import '../src/css/PasswordModal.css'; 
+import '../src/css/MemoDetail.css';
 import '../src/css/Postit.css';
 import Home from './pages/Home';
 import Memo from './pages/Memo';

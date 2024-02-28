@@ -4,8 +4,7 @@ import keyboard from '../images/keyword.png';
 import mouse from '../images/mouse.png';
 import Modal from '../components/MemoDetail';
 import PasswordModal from '../components/PasswordModal';
-import '../MemoDetail.css';
-import axios from "axios";
+// import axios from "axios";
 
 
 function Memo() {
@@ -15,6 +14,7 @@ function Memo() {
   const [name, setName] = useState(''); // 사용자 이름 상태 관리
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림/닫힘 상태 관리
   const [modalContent, setModalContent] = useState(''); // 모달에 표시될 내용 관리
+  const [modalDate, setModalDate] = useState(''); // 모달에 표시될 날짜 관리
   const [modalShape, setModalShape] = useState('');  // 모달 모양(디자인) 상태 관리
   const [editingMemoId, setEditingMemoId] = useState(null);//수정 상태 관리
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
@@ -36,7 +36,6 @@ function Memo() {
         return response.json();
       })
       .then(data => setMemos(data))
-      .then(console.log(memos))
       .catch(error => console.error("메모 데이터를 불러오는 중 에러 발생:", error));
   }, [id]);
 
@@ -52,6 +51,7 @@ function Memo() {
 
   // 메모 클릭 핸들러 함수
   const handleMemoClick = (memo) => {
+    setModalDate(memo.date);
     setModalContent(memo.content);
     setEditingMemoId(memo.id);
     setIsModalOpen(true);
@@ -166,6 +166,7 @@ const handlePasswordConfirm = async (password) => {
         <Modal
           className={`MemoDetail-content ${modalShape === 'heart' ? 'heart' : ''}`}
           content={modalContent}
+          date={modalDate}
           onClose={closeModal}
           onDelete={() => handleDeleteClick(editingMemoId)}
           onEdit={() => handleEditClick(editingMemoId)}

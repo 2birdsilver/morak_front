@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../css/PasswordModal.css'; // CSS 파일 경로 확인 필요
 
 function PasswordModal({ isOpen, onClose, onConfirm }) {
   const [password, setPassword] = useState('');

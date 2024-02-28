@@ -1,12 +1,11 @@
 import React from 'react';
-import '../App.css';
 
 //props로 member 객체와 onClick 함수를 받음
 function Desk({ member, onClick }) {
   return (
     <div className='member' onClick={onClick}>
       {member.photoUrl ? (
-        <img src={member.photoUrl} className='photo' alt={`${member.name}'s photo`} />
+        <img src={member.photoUrl} className='photo' alt={`${member.name}'s profile`} />
       ) : (
         <div>사진 없음</div>
       )}
