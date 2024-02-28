@@ -15,6 +15,7 @@ function Memo() {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림/닫힘 상태 관리
   const [modalContent, setModalContent] = useState(''); // 모달에 표시될 내용 관리
   const [modalDate, setModalDate] = useState(''); // 모달에 표시될 날짜 관리
+  const [modalWriter, setModalWriter] = useState(''); 
   const [modalShape, setModalShape] = useState('');  // 모달 모양(디자인) 상태 관리
   const [editingMemoId, setEditingMemoId] = useState(null);//수정 상태 관리
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
@@ -53,6 +54,7 @@ function Memo() {
   const handleMemoClick = (memo) => {
     setModalDate(memo.date);
     setModalContent(memo.content);
+    setModalWriter(memo.writer)
     setEditingMemoId(memo.id);
     setIsModalOpen(true);
     setModalShape(memo.shape);
@@ -138,8 +140,8 @@ const handlePasswordConfirm = async (password) => {
     <div className='wrap memo'>
       <h2>{name}에게 포스트잇을 붙여봐!</h2>
       <div className='btns'>
-        <button className='btn' onClick={goToCreateMemo}>📝 Memo</button>
         <button className='btn' onClick={goToHome}>🏠 Home</button>
+        <button className='btn' onClick={goToCreateMemo}>📝 Memo</button>
       </div>
 
       {/* 메모 목록 표시 영역 */}
@@ -167,6 +169,7 @@ const handlePasswordConfirm = async (password) => {
           className={`MemoDetail-content ${modalShape === 'heart' ? 'heart' : ''}`}
           content={modalContent}
           date={modalDate}
+          writer={modalWriter}
           onClose={closeModal}
           onDelete={() => handleDeleteClick(editingMemoId)}
           onEdit={() => handleEditClick(editingMemoId)}
