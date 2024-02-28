@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import logo from '../images/kccic.png';
 
 function Header() {
 
@@ -13,9 +14,9 @@ function Header() {
 
   return (
     <div className='header'>
-        <div className='logo'>KCC정보통신</div>
+        <img src={logo} className='logo' alt="logo"/>
         <div className='title' onClick={goToHome}>
-          KCC's Happy Desk
+          Happy Desk
         </div>
         <div className='text'>포스트잇으로 메모를 남겨보세요!</div>
     </div>

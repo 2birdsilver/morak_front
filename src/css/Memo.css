@@ -13,8 +13,7 @@
   }
   
   .note.square {
-    background-color: #fcf8e3;
-    border: 1px solid #f5d6ab;
+    /* background-color: #fcf8e3; */
     border-radius: 6px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     margin: 10px;
@@ -29,6 +28,19 @@
     justify-content: center;
     align-content: center;
   }
+
+  .note.square.beige {
+       background-color: #fcf8e3;
+  }
+
+
+  .note.square.pink {
+    background-color: pink;
+}
+
+.note.square.skyblue {
+  background-color: rgb(178, 222, 240);
+}
   
   @media screen and (max-width: 760px) {
     .note.square {
@@ -64,10 +76,28 @@
     top: 0;
     width: 75px;
     height: 120px;
-    background-color: pink;
+    /* background-color: pink; */
     border-radius: 50px 50px 0 0;
     z-index: -1;
   }
+
+  .note.heart.pink::before,
+  .note.heart.pink::after {
+  background-color: pink;
+}
+
+.note.heart.beige::before,
+  .note.heart.beige::after {
+  background-color: #fcf8e3;
+}
+
+.note.heart.skyblue::before,
+  .note.heart.skyblue::after {
+  background-color: rgb(178, 222, 240);
+}
+
+
+
   
   @media screen and (max-width: 760px) {
     .note.heart::before,

@@ -14,6 +14,8 @@ function Postit() {
         const [writer, setWriter] = useState('');
         const [password, setPassword] = useState('');
         const [content, setContent] = useState('');
+        const [shape, setShape] = useState('square');
+        const [color, setColor] = useState('beige');
         const [isEditing, setIsEditing] = useState(false);
         const [recipient, setRecipient] = useState(false);
         const [memoId, setMemoId] = useState(false);
@@ -47,8 +49,8 @@ function Postit() {
                 recipient,
                 content,
                 password,
-                shape: "square",
-                color: "white"
+                shape,
+                color
             };
 
             if (isEditing) {
@@ -82,7 +84,7 @@ function Postit() {
   return (
           <div className='wrap memo'>
               <button className='back-btn' onClick={goback}>◀ 뒤로가기</button>
-              <div className="post-form-container">
+              <div className={`post-form-container ${color}`}>
                   <form className="post-form" onSubmit={handlePostitSubmit}>
                       <div className="form-group">
                           <label htmlFor="writer">닉네임</label>
@@ -100,6 +102,7 @@ function Postit() {
                               type="password"
                               id="password"
                               name="password"
+                              placeholder='비밀번호를 꼭 기억해주세요'
                               value={password}
                               onChange={(e) => setPassword(e.target.value)}
                           />
@@ -114,6 +117,67 @@ function Postit() {
                               onChange={(e) => setContent(e.target.value)}
                           ></textarea>
                       </div>
+                       {/* 모양 선택 */}
+                    <div className="form-group">
+                        <label>모양</label>
+                        <div className='label-container'>
+                            <label style={{marginRight: '20px'}}>
+                                <input
+                                    type="radio"
+                                    name="shape"
+                                    value="square"
+                                    checked={shape === "square"}
+                                    onChange={(e) => setShape(e.target.value)} /> 
+                                Square
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="shape"
+                                    value="heart"
+                                    checked={shape === "heart"}
+                                    onChange={(e) => setShape(e.target.value)}
+                                /> 
+                                Heart
+                            </label>
+                        </div>
+                    </div>
+                    {/* 색상 선택 */}
+                    <div className="form-group">
+                        <label>색상</label>
+                        <div className='label-container'>
+                            <label style={{marginRight: '10px'}}>
+                                <input
+                                    type="radio"
+                                    name="color"
+                                    value="beige"
+                                    checked={color === "beige"}
+                                    onChange={(e) => setColor(e.target.value)}
+                                /> Beige
+                            </label>
+                            <label style={{marginRight: '10px'}}>
+                                <input
+                                    type="radio"
+                                    name="color"
+                                    value="pink"
+                                    checked={color === "pink"}
+                                    onChange={(e) => setColor(e.target.value)}
+                                /> Pink
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="color"
+                                    value="skyblue"
+                                    checked={color === "skyblue"}
+                                    onChange={(e) => setColor(e.target.value)}
+                                /> Skyblue
+                            </label>
+                        </div>
+                    </div>
+                    
+                    
+                    
                       <div className="form-buttons">
                           {isEditing ? (
                               <button type="submit" className="p-btn">수정</button>

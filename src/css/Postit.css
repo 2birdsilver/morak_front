@@ -20,6 +20,18 @@
     border: 1px solid #ccc;
     border-radius: 5px;
   }
+
+  .post-form-container.beige {
+  background-color: #fcf8e3;
+  }
+
+  .post-form-container.pink {
+    background-color: pink;
+    }
+
+    .post-form-container.skyblue {
+      background-color: rgb(178, 222, 240);
+      }
   
   @media screen and (max-width: 760px) {
     .post-form-container {
@@ -72,3 +84,11 @@
   .add-btn:hover {
     background-color: #0056b3;
   }
+
+  .label-container {
+    width: 70%;
+    display: flex;
+    /* justify-content: space-around; */
+  }
+
+  

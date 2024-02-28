@@ -34,6 +34,7 @@ function Memo() {
         return response.json();
       })
       .then(data => setMemos(data))
+      .then(console.log(memos))
       .catch(error => console.error("메모 데이터를 불러오는 중 에러 발생:", error));
   }, [id]);
 
@@ -99,7 +100,7 @@ const handleDeleteClick = (memoId) => {
           <div className="notes-container">
             {memos.map(memo => (
               <div
-                className={`note ${memo.shape}`} // memo.shape 값에 따라 'note square' 또는 'note heart' 클래스 적용
+                className={`note ${memo.shape} ${memo.color}`} // memo.shape 값에 따라 'note square' 또는 'note heart' 클래스 적용
                 key={memo.id}
                 onClick={() => handleMemoClick(memo)}
               >
