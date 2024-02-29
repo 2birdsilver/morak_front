@@ -29,7 +29,7 @@ function Memo() {
       .catch(error => console.error("사용자 정보를 불러오는 중 에러 발생:", error));
 
     // 메모 데이터를 불러오는 API 호출
-    fetch(`/memo/${id}`)
+    fetch(`/api/memo/${id}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('메모를 불러오는 데 실패했습니다.');
@@ -68,28 +68,10 @@ function Memo() {
   };
 
   // 메모 수정 페이지로 이동하는 함수
-const handleEditClick = () => {
-  navigate(`/postit/${editingMemoId}?edit=true`);
-  setIsModalOpen(false);
-};
-
-// 메모 삭제 함수
-/*const handleDeleteClick = (memoId) => {
-=======
-const handleDeleteClick = (memoId) => {
->>>>>>> d8451e20264f4240866926c6bec064ba67cbb172
-  axios.delete(`/memo/${memoId}`)
-    .then(() => {
-      alert("메모가 삭제되었습니다.");
-      setIsModalOpen(false); // 모달 닫기
-      setMemos(memos.filter(memo => memo.id !== memoId)); // 삭제된 메모를 목록에서 제거
-    })
-    .catch(error => {
-      console.error("메모 삭제 중 에러 발생:", error);
-      alert("메모 삭제에 실패했습니다.");
-    });
-<<<<<<< HEAD
-};*/
+  const handleEditClick = () => {
+    navigate(`/postit/${editingMemoId}?edit=true`);
+    setIsModalOpen(false);
+  };
 
   // 메모 삭제 함수 수정
   const handleDeleteClick = (memoId) => {
@@ -98,21 +80,21 @@ const handleDeleteClick = (memoId) => {
   };
 
   // 비밀번호 모달에서 확인을 눌렀을 때 실행될 함수
-const handlePasswordConfirm = async (password) => {
-  console.log("입력된 비밀번호:", password);
-  console.log("입력된 메모id:", editingMemoId);
-  // 비밀번호와 메모 ID를 서버에 전송
-  try {
-    const response = await fetch('/memo/delete', {
-      method: 'POST', // 메소드를 DELETE로 변경
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        memoId: editingMemoId, // 삭제하려는 메모의 ID
-        password: password, // 사용자가 입력한 비밀번호
-      }),
-    });
+  const handlePasswordConfirm = async (password) => { 
+    console.log("입력된 비밀번호:", password);
+    console.log("입력된 메모id:", editingMemoId);
+    // 비밀번호와 메모 ID를 서버에 전송
+    try {
+      const response = await fetch('/memo/delete', {
+        method: 'POST', // 메소드를 DELETE로 변경
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          memoId: editingMemoId, // 삭제하려는 메모의 ID
+          password: password, // 사용자가 입력한 비밀번호
+        }),
+      });
 
       if (response.status === 202) {
         alert("메모를 삭제하였습니다.");
@@ -129,9 +111,10 @@ const handlePasswordConfirm = async (password) => {
       alert("메모 삭제 과정에서 오류가 발생했습니다.");
       // 네트워크 오류 또는 요청 실패 처리
     }
-
-  setIsPasswordModalOpen(false); // 비밀번호 입력이 완료되면 모달을 닫음
-};
+    
+    // 비밀번호 입력이 완료되면 모달을 닫음
+    setIsPasswordModalOpen(false); 
+  };
 
 
 
