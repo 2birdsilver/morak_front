@@ -6,6 +6,10 @@
     display: inline;
     font-weight: bold;
   }
+
+  .m-content {
+    display: none;
+  }
   
   .empty-message {
     margin-top: 20px;
