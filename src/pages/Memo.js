@@ -92,7 +92,7 @@ function Memo() {
     console.log("입력된 메모id:", editingMemoId);
     // 비밀번호와 메모 ID를 서버에 전송
     try {
-      const response = await fetch('/memo/delete', {
+      const response = await fetch('/api/memo/delete', {
         method: 'POST', // 메소드를 DELETE로 변경
         headers: {
           'Content-Type': 'application/json',
