@@ -16,6 +16,8 @@ import Postit from './pages/Postit';
 import Print from './pages/Print';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Login from './pages/Login';
+import MyPage from './pages/MyPage';
 
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
          <Route path="/memo/:id" element={<Memo />} />
          <Route path="/postit/:id" element={<Postit />} />
          <Route path="/print" element={<Print />}/>
+         <Route path='/login' element={<Login />} />
+         <Route path='/mypage' element={<MyPage />} />
       </Routes>
       <Footer />
     </HashRouter>
