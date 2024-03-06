@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import keyboard from '../images/keyword.png';
 import mouse from '../images/mouse.png';
@@ -21,31 +21,29 @@ function Memo() {
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
 
+  const fetchUserInfo = useCallback(() => {
+    fetch(`/members/${id}`)
+      .then(response => response.json())
+      .then(data => setName(data.name))
+      .catch(error => console.error("사용자 정보를 불러오는 중 에러 발생:", error));
+  }, [id]); // id is a dependency
+
+  const fetchMemoData = useCallback(() => {
+    fetch(`/api/memo/${id}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('메모를 불러오는 데 실패했습니다.');
+        }
+        return response.json();
+      })
+      .then(data => setMemos(data))
+      .catch(error => console.error("메모 데이터를 불러오는 중 에러 발생:", error));
+  }, [id]); // id is a dependency
+
   useEffect(() => {
     fetchUserInfo();
     fetchMemoData();
-  }, [id]);
-
-  const fetchUserInfo = () => {
-    // 사용자 정보를 불러오는 API 호출
-    fetch(`/members/${id}`)
-    .then(response => response.json())
-    .then(data => setName(data.name))
-    .catch(error => console.error("사용자 정보를 불러오는 중 에러 발생:", error));
-  }
-
-  const fetchMemoData = () => {
-    // 메모 데이터를 불러오는 API 호출
-    fetch(`/api/memo/${id}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('메모를 불러오는 데 실패했습니다.');
-      }
-      return response.json();
-    })
-    .then(data => setMemos(data))
-    .catch(error => console.error("메모 데이터를 불러오는 중 에러 발생:", error));
-  }
+  }, [id, fetchUserInfo, fetchMemoData]);
 
   // 메모 작성 페이지로 이동하는 함수
   const goToCreateMemo = () => {
