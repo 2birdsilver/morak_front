@@ -201,6 +201,13 @@
   .btn:hover {
     cursor: pointer;
   }
+
+  /* 모바일 기기에서 Print 버튼 숨기기 */
+  @media screen and (max-width: 760px) {
+    .btn-print {
+      display: none;
+    }
+  }
   
   .notebook {
     width: 600px;

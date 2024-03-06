@@ -59,70 +59,11 @@ function Memo() {
 
   // 프린트
   const getPrintPaper = () => {
-      // 'notebook' 클래스를 가진 요소의 HTML을 찾아냅니다.
-    const notebookElement = document.querySelector('.notebook').innerHTML;
-
-    // 새로운 팝업 창을 생성합니다.
-    const printWindow = window.open('', '_blank');
-
-    // 팝업 창에 HTML을 작성합니다. 필요한 스타일을 <style> 태그를 통해 추가할 수 있습니다.
-    printWindow.document.write(`
-      <html>
-        <head>
-          <title>${name}에게</title>
-          <style>
-            /* 프린트할 내용의 스타일을 여기에 추가합니다. */
-            body {
-              font-family: "omyu-pretty";
-              margin: 0;
-              padding: 50px;
-            }
-            .notebook {
-              max-width: 600px;
-              margin: 20px auto;
-              padding: 20px;
-              background: #ffefc1; /* 편지지 배경색 */
-              border: 2px solid #f9d6b1; /* 테두리 색상 */
-              border-radius: 8px; /* 테두리 둥글게 */
-              box-shadow: 0 0 10px rgba(0,0,0,0.2); /* 그림자 효과 */
-            }
-            .note {
-              margin-bottom: 20px;
-              padding: 15px;
-              background: #ffffff; /* 메모 배경색 */
-              border: 1px solid #f9d6b1; /* 메모 테두리 색상 */
-              border-radius: 5px; /* 메모 테두리 둥글게 */
-              box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 메모 그림자 효과 */
-            }
-            .writer {
-              font-size: 1.2em;
-              color: #de8f6e; /* 작성자 이름 색상 */
-              margin-bottom: 10px; /* 여백 추가 */
-            }
-            .m-content {
-              font-size: 1em;
-              line-height: 1.5;
-              color: #333; /* 내용 색상 */
-              text-align: left; /* 텍스트 정렬 */
-            }
-          </style>
-        </head>
-        <body>
-          <h1 className='m-name'>${name} 에게</h1>
-          ${notebookElement} <!-- 프린트할 내용 -->
-        </body>
-      </html>
-    `);
-
-    printWindow.document.close(); // 문서 작성을 마칩니다.
-    printWindow.focus(); // 프린트 창에 포커스를 맞춥니다.
-
-    // 짧은 딜레이 후에 프린트 창에서 프린트 다이얼로그를 엽니다.
-    setTimeout(() => {
-      printWindow.print(); // 프린트 다이얼로그를 엽니다.
-      printWindow.close(); // 프린트 후 팝업 창을 닫습니다.
-    }, 250);
+    if (memos) {
+      navigate('/print', { state: { memos: memos, name: name } });
+    }
   }
+      
 
   // 메모 클릭 핸들러 함수
   const handleMemoClick = (memo) => {
@@ -198,7 +139,7 @@ function Memo() {
       <h2>{name}에게 포스트잇을 붙여봐!</h2>
       <div className='btns'>
         <button className='btn' onClick={goToHome}>🏠 Home</button>
-        <button className='btn' onClick={getPrintPaper}>📩 Print</button>
+        <button className='btn btn-print' onClick={getPrintPaper}>📩 Print</button>
         <button className='btn' onClick={goToCreateMemo}>📝 Memo</button>
       </div>
 

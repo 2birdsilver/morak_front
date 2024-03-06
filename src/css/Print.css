@@ -1,0 +1,36 @@
+.p-container {
+    column-count: 2; /* 2개의 컬럼으로 나눔 */
+    column-gap: 20px;
+    text-align: left;
+}
+
+.each-memo {
+    break-inside: avoid; /* 컬럼 내에서 메모가 분할되지 않도록 함 */
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgb(194, 181, 181);
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1); 
+}
+
+.p-writer {
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.p-content {
+    text-align: justify; 
+    line-height: 1.5; 
+}
+
+@media print {
+    .header {
+        display: none;
+    }
+    .footer {
+        display: none;
+    }
+
+  }
