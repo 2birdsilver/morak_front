@@ -14,7 +14,7 @@
 
   .header .title:hover {
     cursor: pointer;
-    color: #4C2A2A;
+    color: rgb(252, 253, 231);
   }
   
   .header .title {
