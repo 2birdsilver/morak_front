@@ -11,22 +11,17 @@ function Login() {
   };
   return (
     <div className='wrap memo'>
-    <div className='post-form-container'>
-    <h1>Login</h1>
-        <form className="post-form" onSubmit={handleLoginSubmit}>
-            <div className="form-group">
-                <label htmlFor="writer">이메일</label>
+        <div className='login-form-container'>
+        <h1>Login</h1>
+            <form className="login-form" onSubmit={handleLoginSubmit}>
                 <input
                     type="text"
                     id="email"
                     name="email"
-                    placeholder='kCC정보통신 이메일을 입력하세요'
+                    placeholder='이메일을 입력하세요'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-            </div>
-            <div className="form-group">
-                <label htmlFor="password">비밀번호</label>
                 <input
                     type="password"
                     id="password"
@@ -35,12 +30,23 @@ function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-            </div>
-            <button type="submit" className="p-btn add-btn">로그인</button>
-             
-        </form>
+                <div className='login-btns'>
+                    <button type="submit" className='login-btn'>로그인</button>
+                    <button type="submit" className='sign-btn'>회원가입</button>
+                    <div className='hr-line'>
+                        <hr />
+                        <span>OR</span>
+                        <hr/>
+                    </div>
+                    <button type="submit" className='sign-btn google-login'>
+                        <i className='icon-google'></i>
+                        구글 계정으로 로그인
+                    </button>
+                </div>
+               
+            </form>
+        </div>
     </div>
-</div>
   )
 }
 
