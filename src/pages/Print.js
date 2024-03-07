@@ -1,14 +1,22 @@
 import React, {useEffect} from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 function Print() {
     const {state} = useLocation();
+    const navigate = useNavigate();
     const { memos, name } = state;
 
-    useEffect(()=>{
-         window.print();
-    },[])
+    useEffect(() => {
+       
+        const timer = setTimeout(() => {
+            window.print();
+            window.close();
+            navigate(-1);
+        }, 250);
+
+        return () => clearTimeout(timer); 
+    }, []);
 
 
     return (
