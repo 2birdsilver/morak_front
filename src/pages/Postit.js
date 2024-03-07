@@ -16,10 +16,12 @@ function Postit() {
     const [content, setContent] = useState('');
     const [shape, setShape] = useState('square');
     const [color, setColor] = useState('beige');
-    const [isEditing, setIsEditing] = useState(false);
     const [recipient, setRecipient] = useState(false);
-    const [memoId, setMemoId] = useState(false);
 
+    const [memoId, setMemoId] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+
+    const maxLength = 255;
 
      useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
@@ -43,6 +45,7 @@ function Postit() {
         }
      }, [params.id, location.search]);
 
+
      const handlePostitSubmit = async (e) => {
         e.preventDefault();
 
@@ -64,7 +67,7 @@ function Postit() {
                     navigate(-1); // 또는 수정 후 보여줄 페이지로 이동
                 })
                 .catch((err) => {
-                    alert("비밀번호를 잘못 입력하였습니다. 비밀번호 문의는 leesu@kcc.co.kr");
+                    alert("포스트잇 수정이 실패하였습니다.");
                     console.log(err);
                 });
         } else {
@@ -87,6 +90,7 @@ function Postit() {
     <div className='wrap memo'>
         <button className='back-btn' onClick={goback}>◀ 뒤로가기</button>
         <div className={`post-form-container ${color}`}>
+            <h2 className='m-title'>메모 남기기</h2>
             <form className="post-form" onSubmit={handlePostitSubmit}>
                 <div className="form-group">
                     <label htmlFor="writer">닉네임</label>
@@ -117,8 +121,10 @@ function Postit() {
                         rows="10"
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
+                        maxLength={maxLength}
                     ></textarea>
                 </div>
+                <div className='textCount'>글자수 {content.length} / 255</div>
                 {/* 모양 선택 */}
                 <div className="form-group">
                     <label>모양</label>
