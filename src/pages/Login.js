@@ -15,11 +15,13 @@ function Login() {
         email,
         password,
       });
-      alert(res.data); 
-      console.log(res.data);
+      alert("로그인 성공"); 
       localStorage.clear();
       localStorage.setItem("id", res.data.id)
       localStorage.setItem("name", res.data.name);
+      localStorage.setItem("url",res.data.avatarUrl);
+       // 사용자 정의 이벤트 발생
+       window.dispatchEvent(new Event("loginSuccess"));
       navigate('/');
     } catch (error) {
       alert('로그인 실패'); // 에러 처리

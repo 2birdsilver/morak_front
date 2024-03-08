@@ -24,12 +24,21 @@
     cursor: pointer;
   }
 
-  .mypage-icons .mypage-icon {
-    height: 25px;
+  .mypage-icon {
+    height: 30px;
   }
 
-  .mypage-icons .mypage-icon:hover {
-    height: 27px;
+  .mypage-icon:hover {
+    height: 33px;
+  }
+
+  .avatar {
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .avatar:hover {
+    border: 2px solid #eebf23;;
   }
 
   .header .h-login {

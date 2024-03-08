@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function MyPage() {
 
-  const [id, setId] = useState(1);
+ const navigate = useNavigate();
+  const [id, setId] = useState();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -11,14 +13,34 @@ function MyPage() {
   const [keyboard, setKeyboard] = useState('');
   const [mouse, setMouse] = useState('');
 
-  // 사용자 정보 가져오기
-  const fetchUserInfo = (() => {
-    
-  }, []);
+
+  const fetchUserInfo = () => {
+    axios.get(`/members/${id}`)
+        .then((res) =>{
+            const {name, email, introduction, keyboard, mouse} = res.data;
+            console.log(res.data);
+            setName(name);
+            setEmail(email);
+            setIntro(introduction);
+            setKeyboard(keyboard);
+            setMouse(mouse);
+        })
+        .catch((err) => console.error("Error fetching memo data:", err));
+  }
 
   useEffect(() => {
-    // fetchUserInfo();
+    setId(localStorage.getItem("id"));
   }, []);
+
+  useEffect(()=>{
+    fetchUserInfo();
+  },[id]);
+
+  const handleLogout = () => {
+    alert("로그아웃되었습니다.");
+    localStorage.clear();
+    navigate('/');
+  }
 
 
   const handleMyInfoSubmit = async () => {
@@ -46,6 +68,7 @@ function MyPage() {
 
   return (
     <div className='wrap memo'>
+        <button className='logout-btn' onClick={handleLogout}>로그아웃</button>
     <div className='post-form-container'>
       <h1>마이페이지</h1>
         <form className="post-form" onSubmit={handleMyInfoSubmit}>
@@ -110,6 +133,9 @@ function MyPage() {
                     value={mouse}
                     onChange={(e) => setMouse(e.target.value)}
                 />
+            </div>
+            <div className="form-buttons">
+                <button type="submit" className="p-btn my-btn">수정</button>  
             </div>
             </form>
         </div>
