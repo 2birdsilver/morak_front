@@ -4,12 +4,58 @@
     background-color: #ffeaa7;
   }
   
-  
+ 
   .header .logo {
-    height: 50px;
     position: absolute;
     top: 1px;
     left: 1px;
+    height: 25px;
+    padding: 10px 0 0 10px;
+  }
+
+  .mypage-icons {
+    position: absolute;
+    top: 30px;
+    right: 15px;
+    padding: 10px 20px 0 0;
+  }
+
+  .mypage-icons:hover {
+    cursor: pointer;
+  }
+
+  .mypage-icon {
+    height: 30px;
+  }
+
+  .mypage-icon:hover {
+    height: 33px;
+  }
+
+  .avatar {
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .avatar:hover {
+    border: 2px solid #eebf23;;
+  }
+
+  .header .h-login {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 10px 20px 0 0;
+    font-size: large;
+
+    background-color: #fdda65;
+    padding: 7px;
+    border-radius: 5px;
+  }
+
+  .header .h-login:hover {
+    font-weight: bold;
+    cursor: pointer;
   }
 
   .header .title:hover {
@@ -20,7 +66,7 @@
   .header .title {
     font-size: xx-large;
     font-family: "LOTTERIACHAB";
-    padding: 35px 0 15px 0;
+    padding: 30px 0 15px 0;
   }
 
   .header .text {

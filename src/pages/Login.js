@@ -1,14 +1,33 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLoginSubmit = (event) => {
-    event.preventDefault();
-    console.log('로그인 정보:', email, password);
-    // 로그인 로직
+  const navigate = useNavigate();
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault(); 
+    try {
+      const res = await axios.post('http://localhost:8080/auth/login', {
+        email,
+        password,
+      });
+      alert("로그인 성공"); 
+      localStorage.clear();
+      localStorage.setItem("id", res.data.id)
+      localStorage.setItem("name", res.data.name);
+      localStorage.setItem("url",res.data.avatarUrl);
+       // 사용자 정의 이벤트 발생
+       window.dispatchEvent(new Event("loginSuccess"));
+      navigate('/');
+    } catch (error) {
+      alert('로그인 실패'); // 에러 처리
+    }
   };
+
   return (
     <div className='wrap memo'>
         <div className='login-form-container'>

@@ -11,6 +11,7 @@ import '../src/css/MemoDetail.css';
 import '../src/css/Postit.css';
 import '../src/css/Print.css';
 import '../src/css/Login.css';
+import '../src/css/Mypage.css';
 import Home from './pages/Home';
 import Memo from './pages/Memo';
 import Postit from './pages/Postit';
