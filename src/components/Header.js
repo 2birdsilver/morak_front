@@ -1,20 +1,42 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../images/kccic.png';
+import mypage from '../images/person.png';
 
 function Header() {
 
-  const navigate = useNavigate(); // 페이지 네비게이션을 위한 Hook
+  const navigate = useNavigate();
+  const {state} = useLocation();
+  const isLogin = state;
 
-  // 홈 페이지로 이동하는 함수
+  useEffect(()=> {
+    console.log(isLogin);
+  },[])
+
   const goToHome = () => {
     navigate('/');
   };
 
+  const goLogin = () => {
+    navigate('/login');
+  }
+
+  const goMypage = () => {
+    navigate('/mypage');
+  }
 
   return (
     <div className='header'>
         <img src={logo} className='logo' alt="logo"/>
+        {
+          isLogin? 
+          <div className='mypage-icons' onClick={goMypage}>
+            <img src={mypage} className='mypage-icon' alt="mypage-icon"/>
+            <div>홍길동</div>
+          </div> 
+          : <div className='h-login' onClick={goLogin}>로그인</div>
+        }
+       
         <div className='title' onClick={goToHome}>
           Happy Desk
         </div>

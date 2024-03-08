@@ -7,8 +7,6 @@ function MyPage() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const [photo, setPhoto] = useState('');
-  const [nick, setNick] = useState('');
   const [intro, setIntro] = useState('');
   const [keyboard, setKeyboard] = useState('');
   const [mouse, setMouse] = useState('');
@@ -30,7 +28,6 @@ function MyPage() {
      let data = new FormData();
      data.append('id', id);
      data.append('Introduction', intro);
-     data.append('photoUrl',photo );
 
      let config = {
       method: 'put',
@@ -92,16 +89,6 @@ function MyPage() {
                     name="intro"
                     value={intro}
                     onChange={(e) => setIntro(e.target.value)}
-                />
-            </div>
-            <div className="form-group">
-                <label htmlFor="photo">프로필 사진</label>
-                <input
-                type="file"
-                    id="photo"
-                    name="photo"
-                    value={photo}
-                    onChange={(e) => setPhoto(e.target.value)}
                 />
             </div>
             <div className="form-group">
