@@ -22,8 +22,6 @@ function MyPage() {
             setName(name);
             setEmail(email);
             setIntro(introduction);
-            setKeyboard(keyboard);
-            setMouse(mouse);
         })
         .catch((err) => console.error("Error fetching memo data:", err));
   }

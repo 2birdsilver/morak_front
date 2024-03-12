@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import keyboard from '../images/keyword.png';
-import mouse from '../images/mouse.png';
+import mouseImg from '../images/mouse.png';
 import Modal from '../components/MemoDetail';
 import PasswordModal from '../components/PasswordModal';
 // import axios from "axios";
@@ -13,72 +12,72 @@ function Memo() {
   const [memos, setMemos] = useState([]); // 메모 목록 상태 관리
   const [name, setName] = useState(''); // 사용자 이름 상태 관리
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림/닫힘 상태 관리
-  const [modalContent, setModalContent] = useState(''); // 모달에 표시될 내용 관리
-  const [modalDate, setModalDate] = useState(''); // 모달에 표시될 날짜 관리
-  const [modalWriter, setModalWriter] = useState(''); 
-  const [modalShape, setModalShape] = useState('');  // 모달 모양(디자인) 상태 관리
+
+  const [modalInfo, setModalInfo] = useState({ content: '', date: '', writer: '', shape: ''});
   const [editingMemoId, setEditingMemoId] = useState(null);//수정 상태 관리
+
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
-
-
-  const fetchUserInfo = useCallback(() => {
-    fetch(`/members/${id}`)
-      .then(response => response.json())
-      .then(data => setName(data.name))
-      .catch(error => console.error("사용자 정보를 불러오는 중 에러 발생:", error));
-  }, [id]); // id is a dependency
-
-  const fetchMemoData = useCallback(() => {
-    fetch(`/api/memo/${id}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('메모를 불러오는 데 실패했습니다.');
-        }
-        return response.json();
-      })
-      .then(data => setMemos(data))
-      .catch(error => console.error("메모 데이터를 불러오는 중 에러 발생:", error));
-  }, [id]); // id is a dependency
+  const [keyboardUrl, setKeyboardUrl] = useState('');
 
   useEffect(() => {
+    // Fetch user info
+    const fetchUserInfo = async () => {
+      try {
+        const response = await fetch(`/members/${id}`);
+        const data = await response.json();
+        setName(data.name);
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+      }
+    };
+
+    // Fetch memos
+    const fetchMemoData = async () => {
+      try {
+        const response = await fetch(`/api/memo/${id}`);
+        if (!response.ok) throw new Error('Failed to fetch memos.');
+        const data = await response.json();
+        setMemos(data);
+      } catch (error) {
+        console.error("Error fetching memos:", error);
+      }
+    };
+
+    const fetchKeyboardImage = async () => {
+      try {
+        const response = await fetch(`/auth/keyboard/${id}`);
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+        setKeyboardUrl(imageUrl);
+      } catch (error) {
+        console.error("Error fetching keyboard image:", error);
+      }
+    };
+
     fetchUserInfo();
     fetchMemoData();
-  }, [id, fetchUserInfo, fetchMemoData]);
+    fetchKeyboardImage();
 
-  // 메모 작성 페이지로 이동하는 함수
-  const goToCreateMemo = () => {
-    navigate(`/postit/${id}/`);
-  };
+  }, [id]);
 
-  // 홈 페이지로 이동하는 함수
-  const goToHome = () => {
-    navigate('/');
-  };
-
-  // 프린트
-  const getPrintPaper = () => {
-    if (memos) {
-      navigate('/print', { state: { memos: memos, name: name } });
-    }
-  }
-      
-
+    
   // 메모 클릭 핸들러 함수
   const handleMemoClick = (memo) => {
-    setModalDate(memo.date);
-    setModalContent(memo.content);
-    setModalWriter(memo.writer)
+    setModalInfo({ ...memo });
     setEditingMemoId(memo.id);
     setIsModalOpen(true);
-    setModalShape(memo.shape);
   };
 
   // 모달 닫기 함수
   const closeModal = () => {
     setIsModalOpen(false);
-    setModalContent('');
+    setModalInfo({ content: '', date: '', writer: '', shape: '' });
     setEditingMemoId(null);
   };
+
+  const goToCreateMemo = () => navigate(`/postit/${id}/`);
+  const goToHome = () => navigate('/');
+  const getPrintPaper = () => navigate('/print', { state: { memos, name } });
 
   // 메모 수정 페이지로 이동하는 함수
   const handleEditClick = () => {
@@ -99,24 +98,17 @@ function Memo() {
     // 비밀번호와 메모 ID를 서버에 전송
     try {
       const response = await fetch('/api/memo/delete', {
-        method: 'POST', // 메소드를 DELETE로 변경
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          memoId: editingMemoId, // 삭제하려는 메모의 ID
-          password: password, // 사용자가 입력한 비밀번호
-        }),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ memoId: editingMemoId, password }),
       });
-
       if (response.status === 202) {
         alert("메모를 삭제하였습니다.");
         closeModal();
         setMemos(memos.filter(memo => memo.id !== editingMemoId));
       } else if (response.status === 401) {
         alert("비밀번호를 잘못 입력하였습니다. 비밀번호 문의는 leesu@kcc.co.kr");
-      } else {
-        // 그 외의 경우, 일반적인 에러 처리
+      } else { // 그 외의 경우, 일반적인 에러 처리
         alert("메모 삭제 실패: 알 수 없는 에러 발생");
       }
     } catch (error) {
@@ -124,7 +116,6 @@ function Memo() {
       alert("메모 삭제 과정에서 오류가 발생했습니다.");
       // 네트워크 오류 또는 요청 실패 처리
     }
-    
     // 비밀번호 입력이 완료되면 모달을 닫음
     setIsPasswordModalOpen(false); 
   };
@@ -164,10 +155,10 @@ function Memo() {
       {/* 모달이 열렸을 때 표시될 컨텐츠 */}
       {isModalOpen && (
         <Modal
-          className={`MemoDetail-content ${modalShape === 'heart' ? 'heart' : ''}`}
-          content={modalContent}
-          date={modalDate}
-          writer={modalWriter}
+          className={`MemoDetail-content ${modalInfo.shape === 'heart' ? 'heart' : ''}`}
+          content={modalInfo.content}
+          date={modalInfo.date}
+          writer={modalInfo.writer}
           onClose={closeModal}
           onDelete={() => handleDeleteClick(editingMemoId)}
           onEdit={() => handleEditClick(editingMemoId)}
@@ -184,8 +175,8 @@ function Memo() {
 
       {/* 키보드와 마우스 이미지 */}
       <div className='km'>
-        <img className='keyboard' src={keyboard} alt="keyboard" />
-        <img className='mouse' src={mouse} alt="mouse" />
+        <img className='keyboard' src={keyboardUrl} alt="keyboard" />
+        <img className='mouse' src={mouseImg} alt="mouse" />
       </div>
     </div>
   );
