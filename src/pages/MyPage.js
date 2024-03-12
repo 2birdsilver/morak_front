@@ -5,19 +5,21 @@ import { useNavigate } from 'react-router-dom';
 function MyPage() {
 
  const navigate = useNavigate();
-  const [id, setId] = useState();
+  const userId = localStorage.getItem("id");
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [intro, setIntro] = useState('');
-  const [keyboard, setKeyboard] = useState('');
-  const [mouse, setMouse] = useState('');
+//   const [birthday, setBirthday] = useState('');
+//   const [mobile, setMobile] = useState('');
+  const [keyboard, setKeyboard] = useState(null);
+  const [mouse, setMouse] = useState(null);
 
 
   const fetchUserInfo = () => {
-    axios.get(`/members/${id}`)
+    axios.get(`/members/${userId}`)
         .then((res) =>{
-            const {name, email, introduction, keyboard, mouse} = res.data;
+            const {name, email, introduction} = res.data;
             console.log(res.data);
             setName(name);
             setEmail(email);
@@ -26,13 +28,10 @@ function MyPage() {
         .catch((err) => console.error("Error fetching memo data:", err));
   }
 
-  useEffect(() => {
-    setId(localStorage.getItem("id"));
-  }, []);
 
   useEffect(()=>{
     fetchUserInfo();
-  },[id]);
+  },[userId]);
 
   const handleLogout = () => {
     alert("로그아웃되었습니다.");
@@ -41,27 +40,35 @@ function MyPage() {
   }
 
 
-  const handleMyInfoSubmit = async () => {
+  const handleMyInfoSubmit = async (e) => {
+    e.preventDefault(); 
     console.log("내 정보 수정");
+    console.log(keyboard);
 
-     // 리뷰 수정 데이터 보내기
+     // 내 정보 수정
      let data = new FormData();
-     data.append('id', id);
-     data.append('Introduction', intro);
+     data.append('userId', userId);
+     data.append("password", password);
+     data.append('introduction', intro);
+     if (keyboard) data.append("keyboard", keyboard);
 
      let config = {
-      method: 'put',
-      method: 'put',
+      method: 'post',
       maxBodyLength: Infinity,
-      url: `/members/edit/${id}`,
-      data: data
+      url: `/auth/myinfo/${userId}`,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: data,
      };
 
      try {
         const res = await axios.request(config);
-    } catch (error) {
+        alert("정보가 수정되었습니다.")
+        fetchUserInfo();
+      } catch (error) {
         console.error(error);
-    }
+      }
   }
 
   return (
@@ -115,21 +122,19 @@ function MyPage() {
             <div className="form-group">
                 <label htmlFor="keyboard">내 키보드</label>
                 <input
-                type="file"
+                    type="file"
                     id="keyboard"
                     name="keyboard"
-                    value={keyboard}
-                    onChange={(e) => setKeyboard(e.target.value)}
+                    onChange={(e) => setKeyboard(e.target.files[0])}
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="intro">내 마우스</label>
+                <label htmlFor="mouse">내 마우스</label>
                 <input
-                type="file"
+                    type="file"
                     id="mouse"
                     name="mouse"
-                    value={mouse}
-                    onChange={(e) => setMouse(e.target.value)}
+                    onChange={(e) => setMouse(e.target.files[0])}
                 />
             </div>
             <div className="form-buttons">
