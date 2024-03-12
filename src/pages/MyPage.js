@@ -51,6 +51,7 @@ function MyPage() {
      data.append("password", password);
      data.append('introduction', intro);
      if (keyboard) data.append("keyboard", keyboard);
+     if (mouse) data.append("mouse", mouse);
 
      let config = {
       method: 'post',

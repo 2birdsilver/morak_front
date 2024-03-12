@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import mouseImg from '../images/mouse.png';
 import Modal from '../components/MemoDetail';
 import PasswordModal from '../components/PasswordModal';
 // import axios from "axios";
@@ -18,6 +17,7 @@ function Memo() {
 
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [keyboardUrl, setKeyboardUrl] = useState('');
+  const [mouseUrl, setMouseUrl] = useState('');
 
   useEffect(() => {
     // Fetch user info
@@ -45,18 +45,32 @@ function Memo() {
 
     const fetchKeyboardImage = async () => {
       try {
-        const response = await fetch(`/auth/keyboard/${id}`);
+        const response = await fetch(`/auth/image/keyboard/${id}`);
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
+        // console.log(imageUrl);
         setKeyboardUrl(imageUrl);
       } catch (error) {
         console.error("Error fetching keyboard image:", error);
       }
     };
 
+    const fetchMouseImage = async () => {
+      try {
+        const response = await fetch(`/auth/image/mouse/${id}`);
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+        // console.log(imageUrl);
+        setMouseUrl(imageUrl);
+      } catch (error) {
+        console.error("Error fetching mouse image:", error);
+      }
+    };
+
     fetchUserInfo();
     fetchMemoData();
     fetchKeyboardImage();
+    fetchMouseImage();
 
   }, [id]);
 
@@ -176,7 +190,7 @@ function Memo() {
       {/* 키보드와 마우스 이미지 */}
       <div className='km'>
         <img className='keyboard' src={keyboardUrl} alt="keyboard" />
-        <img className='mouse' src={mouseImg} alt="mouse" />
+        <img className='mouse' src={mouseUrl} alt="mouse" />
       </div>
     </div>
   );
