@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Desk from '../components/Desk.js';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+
 function Home() {
   const [members, setMembers] = useState([]);
   const navigate = useNavigate();
-  const location = useLocation(); // useLocation 훅 사용
+  const location = useLocation();
 
   const goToMemos = (member) => {
     navigate(`/memo/${member.id}`);
@@ -18,16 +19,14 @@ function Home() {
       .catch((error) => console.error("Fetching members failed", error));
 
     const token = searchParam('token');
-
     if (token) {
       localStorage.setItem("access_token", token);
-      console.log("token: " + token);
     }
 
     function searchParam(key) {
-      return new URLSearchParams(location.search).get(key);
+      return new URLSearchParams(window.location.search).get(key);
     }
-  }, []);
+  }, [location]);
 
   return (
     <div className="wrap">
