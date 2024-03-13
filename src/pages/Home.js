@@ -7,6 +7,7 @@ function Home() {
   const [members, setMembers] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
+  
 
   const goToMemos = (member) => {
     navigate(`/memo/${member.id}`);
@@ -26,6 +27,7 @@ function Home() {
     function searchParam(key) {
       return new URLSearchParams(window.location.search).get(key);
     }
+
   }, [location]);
 
   return (
