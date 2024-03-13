@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../images/kccic.png';
 import mypage from '../images/person.png';
 
 function Header() {
-
+  const {state} = useLocation();
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(state);
 
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
@@ -20,8 +20,7 @@ function Header() {
         setUrl(localStorage.getItem("url"));
       } else {
         setIsLogin(false);
-        setName('');
-        setUrl('');
+        localStorage.clear()
       }
     };
   
@@ -52,9 +51,9 @@ function Header() {
           <>
             <div className='mypage-icons' onClick={goMypage}>
               {
-                url? 
-                <img src={url} className='avatar' alt="inter-avatar"/> 
-              : <img src={mypage} className='mypage-icon' alt="mypage-icon"/>
+                url === "null"? 
+                <img src={mypage} className='mypage-icon' alt="mypage-icon"/>
+               : <img src={url} className='avatar' alt="inter-avatar"/> 
               }
               <div>{name}</div>
             </div> 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ function MyPage() {
   const [mouse, setMouse] = useState(null);
 
 
-  const fetchUserInfo = () => {
+  const fetchUserInfo = useCallback(() => {
     axios.get(`/members/${userId}`)
         .then((res) =>{
             const {name, email, introduction} = res.data;
@@ -26,21 +26,24 @@ function MyPage() {
             setIntro(introduction);
         })
         .catch((err) => console.error("Error fetching memo data:", err));
-  }
-
+  },[userId]);
 
   useEffect(()=>{
     fetchUserInfo();
-  },[userId]);
+  },[fetchUserInfo]);
 
   const handleLogout = () => {
     alert("로그아웃되었습니다.");
     localStorage.clear();
-    navigate('/');
+    navigate('/', {state : false});
   }
 
 
   const handleMyInfoSubmit = async (e) => {
+    if (password === '') {
+      alert("비밀번호를 입력하세요.");
+      return;
+    }
     e.preventDefault(); 
     console.log("내 정보 수정");
     console.log(keyboard);
@@ -57,19 +60,19 @@ function MyPage() {
       method: 'post',
       maxBodyLength: Infinity,
       url: `/auth/myinfo/${userId}`,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
       data: data,
      };
 
-     try {
-        const res = await axios.request(config);
+     axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
         alert("정보가 수정되었습니다.")
-        fetchUserInfo();
-      } catch (error) {
-        console.error(error);
-      }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("정보 수정에 실패하였습니다.")
+      });
+
   }
 
   return (
@@ -105,7 +108,7 @@ function MyPage() {
                     type="password"
                     id="password"
                     name="password"
-                    placeholder=''
+                    placeholder='비밀번호를 입력하세요'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
