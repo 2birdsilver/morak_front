@@ -59,7 +59,7 @@ function MyPage() {
      let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: `/auth/myinfo/${userId}`,
+      url: `/auth/myinfo/update`,
       data: data,
      };
 
@@ -140,6 +140,11 @@ function MyPage() {
                     name="mouse"
                     onChange={(e) => setMouse(e.target.files[0])}
                 />
+            </div>
+            <div className='fileText'>
+              <div>⚠ 1MB 이하 이미지를 첨부해주세요.</div>
+              <div>⚠ 키보드는 가로가 더 긴 이미지로</div>
+              <div>⚠ 배경을 제거하는 것을 추천</div>
             </div>
             <div className="form-buttons">
                 <button type="submit" className="p-btn my-btn">수정</button>  

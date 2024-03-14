@@ -4,6 +4,9 @@ import Modal from '../components/MemoDetail';
 import PasswordModal from '../components/PasswordModal';
 // import axios from "axios";
 
+import keyboardBased from '../images/keyboard.png';
+import mouseBased  from '../images/mouse.png';
+
 
 function Memo() {
   const { id } = useParams(); // URL에서 id 값을 가져오기
@@ -16,6 +19,7 @@ function Memo() {
   const [editingMemoId, setEditingMemoId] = useState(null);//수정 상태 관리
 
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+
   const [keyboardUrl, setKeyboardUrl] = useState('');
   const [mouseUrl, setMouseUrl] = useState('');
 
@@ -45,24 +49,26 @@ function Memo() {
 
     const fetchKeyboardImage = async () => {
       try {
-        const response = await fetch(`/auth/image/keyboard/${id}`);
+        const response = await fetch(`/auth/img/keyboard/${id}`);
+        if (!response.ok) throw new Error('Failed to fetch keyboard image.');
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
-        // console.log(imageUrl);
         setKeyboardUrl(imageUrl);
       } catch (error) {
+        setKeyboardUrl(keyboardBased); // 오류 시 로컬 이미지 사용
         console.error("Error fetching keyboard image:", error);
       }
     };
 
     const fetchMouseImage = async () => {
       try {
-        const response = await fetch(`/auth/image/mouse/${id}`);
+        const response = await fetch(`/auth/img/mouse/${id}`);
+        if (!response.ok) throw new Error('Failed to fetch mouse image.');
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
-        // console.log(imageUrl);
         setMouseUrl(imageUrl);
       } catch (error) {
+        setMouseUrl(mouseBased); // 오류 시 로컬 이미지 사용
         console.error("Error fetching mouse image:", error);
       }
     };

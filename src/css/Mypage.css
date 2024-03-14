@@ -21,3 +21,20 @@
   .my-btn:hover {
     background-color: #777575;
   }
+
+  .fileText {
+    text-align: left;
+    margin-left: 160px;
+    margin-top: 10px;
+  }
+
+  .fileText div {
+    color: rgba(0, 0, 0, 0.664);
+  }
+
+  @media screen and (max-width: 760px) {
+    .fileText {
+      margin-left: 80px;
+    }
+  }
+  
