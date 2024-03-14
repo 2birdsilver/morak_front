@@ -20,7 +20,6 @@ function MyPage() {
     axios.get(`/members/${userId}`)
         .then((res) =>{
             const {name, email, introduction} = res.data;
-            console.log(res.data);
             setName(name);
             setEmail(email);
             setIntro(introduction);
@@ -45,8 +44,6 @@ function MyPage() {
       return;
     }
     e.preventDefault(); 
-    console.log("내 정보 수정");
-    console.log(keyboard);
 
      // 내 정보 수정
      let data = new FormData();
