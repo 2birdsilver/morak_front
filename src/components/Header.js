@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../images/kccic.png';
 import mypage from '../images/person.png';
 import { useAuth } from '../components/AuthContext';
@@ -12,20 +12,23 @@ function Header() {
   const [id, setId] = useState('');
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
+  const location = useLocation();
 
   useEffect(() => {
-    const updateProfile = async () => {
-      // if (currentUser) {
-      //   setIsLogin(true);
-      //   setName(localStorage.getItem("name"));
-      //   setUrl(localStorage.getItem("url"));
-      // } else {
-      //   setIsLogin(false);
-      //   setName('');
-      //   setUrl('');
-      // }
 
-      // access token이용해서 서버에서 받아온 이용자 정보(로그인 안된 경우 null값 반환)
+    // 쿼리 파라미터로 받은 access token을 local storage에 저장
+    const token = searchParam('token');
+    if (token) {
+      localStorage.setItem("access_token", token);
+    }
+
+    function searchParam(key) {
+      return new URLSearchParams(window.location.search).get(key);
+    }
+
+    // access token으로 서버에 사용자 정보 요청
+    const updateProfile = async () => {
+ 
       const user = await getUserInfo();
 
       if (user) {
@@ -44,7 +47,7 @@ function Header() {
     return () => {
       window.removeEventListener("loginSuccess", updateProfile); // 컴포넌트 언마운트 시 리스너 제거
     };
-  }, [getUserInfo]);
+  }, [location, getUserInfo]);
 
   const goToHome = () => {
     navigate('/');
@@ -58,9 +61,12 @@ function Header() {
     navigate('/mypage');
   };
 
+  // 로그아웃
   const goLogout = () => {
-    navigate('/logout');
-  };
+    localStorage.removeItem('access_token');
+    document.cookie = 'refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    window.location.href = '/';
+};
 
   return (
     <div className='header'>

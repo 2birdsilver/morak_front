@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from "axios";
+import { useAuth } from '../components/AuthContext';
 
 function Postit() {
 
@@ -10,6 +11,10 @@ function Postit() {
     const goback = () => {
         navigate(-1);
     };
+
+    const { getUserInfo } = useAuth();
+    const [currentUser, setCurrentUser] = useState(null);
+    const [authenticatedWriter, setAuthenticatedWriter] = useState(false);
 
     const [writer, setWriter] = useState('');
     const [password, setPassword] = useState('');
@@ -23,7 +28,7 @@ function Postit() {
 
     const maxLength = 255;
 
-     useEffect(() => {
+    useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         const editMode = searchParams.get('edit') === 'true';
 
@@ -43,10 +48,23 @@ function Postit() {
         } else {
             setRecipient(params.id)
         }
-     }, [params.id, location.search]);
 
+        // 페이지가 마운트될 때 사용자 정보 업데이트
+        updateProfile();
+    }, [params.id, location.search]);
 
-     const handlePostitSubmit = async (e) => {
+    const updateProfile = async () => {
+        const user = await getUserInfo();
+
+        if (user) {
+            setCurrentUser(user);
+            setAuthenticatedWriter(true);
+        } else {
+            setCurrentUser(null);
+        }
+    };
+
+    const handlePostitSubmit = async (e) => {
         e.preventDefault();
 
         const memoData = {
@@ -55,7 +73,8 @@ function Postit() {
             content,
             password,
             shape,
-            color
+            color,
+            authenticatedWriter
         };
 
         if (isEditing) {
@@ -83,117 +102,132 @@ function Postit() {
                     console.log(err);
                 })
         }
-     };
+    };
 
 
-  return (
-    <div className='wrap memo'>
-        <button className='back-btn' onClick={goback}>◀ 뒤로가기</button>
-        <div className={`post-form-container ${color}`}>
-            <h2 className='m-title'>메모 남기기</h2>
-            <form className="post-form" onSubmit={handlePostitSubmit}>
-                <div className="form-group">
-                    <label htmlFor="writer">닉네임</label>
-                    <input
-                        type="text"
-                        id="nickname"
-                        name="writer"
-                        value={writer}
-                        onChange={(e) => setWriter(e.target.value)}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">비밀번호</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder='비밀번호를 꼭 기억해주세요'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="content">내용</label>
-                    <textarea
-                        id="content"
-                        name="content"
-                        rows="10"
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
-                        maxLength={maxLength}
-                    ></textarea>
-                </div>
-                <div className='textCount'>글자수 {content.length} / 255</div>
-                {/* 모양 선택 */}
-                <div className="form-group">
-                    <label>모양</label>
-                    <div className='label-container'>
-                        <label style={{marginRight: '20px'}}>
+    return (
+        <div className='wrap memo'>
+            <button className='back-btn' onClick={goback}>◀ 뒤로가기</button>
+            <div className={`post-form-container ${color}`}>
+                <h2 className='m-title'>메모 남기기</h2>
+                <form className="post-form" onSubmit={handlePostitSubmit}>
+
+                    <div className="form-group">
+                        <label htmlFor="writer">닉네임</label>
+                        {currentUser !== null ? (
                             <input
-                                type="radio"
-                                name="shape"
-                                value="square"
-                                checked={shape === "square"}
-                                onChange={(e) => setShape(e.target.value)} /> 
-                            Square
-                        </label>
-                        <label>
+                                type="text"
+                                id="nickname"
+                                name="writer"
+                                value={currentUser.name}
+                                readOnly
+                            />
+                        ) : (
                             <input
-                                type="radio"
-                                name="shape"
-                                value="heart"
-                                checked={shape === "heart"}
-                                onChange={(e) => setShape(e.target.value)}
-                            /> 
-                            Heart
-                        </label>
+                                type="text"
+                                id="nickname"
+                                name="writer"
+                                value={writer}
+                                onChange={(e) => setWriter(e.target.value)}
+                            />
+                        )}
                     </div>
-                </div>
-                {/* 색상 선택 */}
-                <div className="form-group">
-                    <label>색상</label>
-                    <div className='label-container'>
-                        <label style={{marginRight: '10px'}}>
+
+                    {currentUser == null && (
+                        <div className="form-group">
+                            <label htmlFor="password">비밀번호</label>
                             <input
-                                type="radio"
-                                name="color"
-                                value="beige"
-                                checked={color === "beige"}
-                                onChange={(e) => setColor(e.target.value)}
-                            /> Beige
-                        </label>
-                        <label style={{marginRight: '10px'}}>
-                            <input
-                                type="radio"
-                                name="color"
-                                value="pink"
-                                checked={color === "pink"}
-                                onChange={(e) => setColor(e.target.value)}
-                            /> Pink
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                name="color"
-                                value="skyblue"
-                                checked={color === "skyblue"}
-                                onChange={(e) => setColor(e.target.value)}
-                            /> Skyblue
-                        </label>
-                    </div>
-                </div>
-                <div className="form-buttons">
-                    {isEditing ? (
-                        <button type="submit" className="p-btn">수정</button>
-                    ) : (
-                        <button type="submit" className="p-btn add-btn">등록</button>
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder='비밀번호를 꼭 기억해주세요'
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
                     )}
-                </div>
-            </form>
+
+                    <div className="form-group">
+                        <label htmlFor="content">내용</label>
+                        <textarea
+                            id="content"
+                            name="content"
+                            rows="10"
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
+                            maxLength={maxLength}
+                        ></textarea>
+                    </div>
+                    <div className='textCount'>글자수 {content.length} / 255</div>
+                    {/* 모양 선택 */}
+                    <div className="form-group">
+                        <label>모양</label>
+                        <div className='label-container'>
+                            <label style={{ marginRight: '20px' }}>
+                                <input
+                                    type="radio"
+                                    name="shape"
+                                    value="square"
+                                    checked={shape === "square"}
+                                    onChange={(e) => setShape(e.target.value)} />
+                                Square
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="shape"
+                                    value="heart"
+                                    checked={shape === "heart"}
+                                    onChange={(e) => setShape(e.target.value)}
+                                />
+                                Heart
+                            </label>
+                        </div>
+                    </div>
+                    {/* 색상 선택 */}
+                    <div className="form-group">
+                        <label>색상</label>
+                        <div className='label-container'>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    name="color"
+                                    value="beige"
+                                    checked={color === "beige"}
+                                    onChange={(e) => setColor(e.target.value)}
+                                /> Beige
+                            </label>
+                            <label style={{ marginRight: '10px' }}>
+                                <input
+                                    type="radio"
+                                    name="color"
+                                    value="pink"
+                                    checked={color === "pink"}
+                                    onChange={(e) => setColor(e.target.value)}
+                                /> Pink
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="color"
+                                    value="skyblue"
+                                    checked={color === "skyblue"}
+                                    onChange={(e) => setColor(e.target.value)}
+                                /> Skyblue
+                            </label>
+                        </div>
+                    </div>
+                    <div className="form-buttons">
+                        {isEditing ? (
+                            <button type="submit" className="p-btn">수정</button>
+                        ) : (
+                            <button type="submit" className="p-btn add-btn">등록</button>
+                        )}
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-);
+    );
 }
 
 export default Postit;

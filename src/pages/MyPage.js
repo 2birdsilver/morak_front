@@ -24,38 +24,45 @@ function MyPage() {
 
     const fetchDataFromServer = async () => {
         try {
-            const response = await axios.get(`/api/user`); // Modify the URL according to your API endpoint
-            const userData = response.data; // Assuming the response contains user data
-            setCurrentUser(userData);
+            const config = {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                    'Content-Type': 'application/json',
+                }
+            };
+            const response = await axios.get(`/api/user`, config); // config를 사용하여 요청 설정 전달
+            console.log("response: ", response.data); // response.data로 실제 데이터에 접근
+            // const userData = response.data; // 응답이 사용자 데이터를 포함한다고 가정
+            // setCurrentUser(userData);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const handleMyInfoSubmit = async () => {
-        console.log("내 정보 수정");
+    // const handleMyInfoSubmit = async () => {
+    //     console.log("내 정보 수정");
 
-        // 리뷰 수정 데이터 보내기
-        let data = new FormData();
-        data.append('id', id);
-        data.append('Introduction', intro);
+    //     // 리뷰 수정 데이터 보내기
+    //     let data = new FormData();
+    //     data.append('id', id);
+    //     data.append('Introduction', intro);
 
-        let config = {
-            method: 'get',
-            maxBodyLength: Infinity,
-            url: `/api/user`,
-            data: data
-        };
+    //     let config = {
+    //         method: 'get',
+    //         maxBodyLength: Infinity,
+    //         url: `/api/user`,
+    //         data: data
+    //     };
 
-        try {
-            const res = await axios.request(config);
-            console.log("res: " + res)
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    //     try {
+    //         const res = await axios.request(config);
+    //         console.log("res: " + res)
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
 
-    useEffect(() => {
+    useEffect(() => {                                                             
         const fetchData = async () => {
             const user = await getUserInfo();
             setCurrentUser(user);
@@ -76,7 +83,7 @@ function MyPage() {
             <button className='logout-btn' onClick={handleLogout}>로그아웃</button>
             <div className='post-form-container'>
                 <h1>마이페이지</h1>
-                <form className="post-form" onSubmit={handleMyInfoSubmit}>
+                <form className="post-form" onSubmit={getUserInfo}>
                     <div className="form-group">
                         <label htmlFor="name">이름</label>
                         <input

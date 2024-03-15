@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
       const response = await fetch(url, {
         method: method,
         headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
           'Content-Type': 'application/json',
         },
         body: body,
@@ -73,24 +73,54 @@ export const AuthProvider = ({ children }) => {
   };
 
   // 사용자 정보를 가져오는 함수
-  async function getUserInfo() {
+  const getUserInfo = async () => {
     var body = JSON.stringify({});
     let userInfo = null;
-
+  
     function success(user) {
       userInfo = user;
     };
-
+  
     function fail() {
       userInfo = null;
     };
-
-    await httpRequest('POST', '/api/userInfo', body, success, fail);
+  
+    await httpRequest('POST', '/api/authenticated/userInfo', body, success, fail);
+  
+    if (userInfo != null) {
+      console.log("user name: " + userInfo.name);
+    } else {
+      console.log("비로그인한 회원입니다.")
+    }
+    
     return userInfo;
-  }
+  };
+
+  // async function getUserInfo() {
+  //   var body = JSON.stringify({});
+  //   let userInfo = null;
+  
+  //   function success(user) {
+  //     userInfo = user;
+  //   };
+  
+  //   function fail() {
+  //     userInfo = null;
+  //   };
+  
+  //   await httpRequest('POST', '/api/authenticated/userInfo', body, success, fail);
+  
+  //   if (userInfo != null) {
+  //     console.log("user name: " + userInfo.name);
+  //   } else {
+  //     console.log("비로그인한 회원입니다.")
+  //   }
+    
+  //   return userInfo;
+  // }
+  
 
   useEffect(() => {
-    // 여기에서 초기 로직 수행
   }, []);
 
   return (
