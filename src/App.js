@@ -21,6 +21,7 @@ import Footer from './components/Footer';
 import Login from './pages/Login';
 import MyPage from './pages/MyPage';
 import { AuthProvider } from './components/AuthContext'; 
+import Logout from './components/Logout';
 
 
 function App() {

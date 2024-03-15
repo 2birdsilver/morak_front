@@ -33,9 +33,8 @@ function Header() {
         setIsLogin(true);
 
       } else {
+        setCurrentUser(null);
         setIsLogin(false);
-        setName('');
-        setUrl('');
       }
     };
 
@@ -59,6 +58,10 @@ function Header() {
     navigate('/mypage');
   };
 
+  const goLogout = () => {
+    navigate('/logout');
+  };
+
   return (
     <div className='header'>
       <img src={logo} className='logo' alt="logo" />
@@ -73,6 +76,8 @@ function Header() {
               }
               <div>{currentUser.name}</div>
             </div>
+            <div className='h-loginout' onClick={goLogout}>로그아웃</div>
+            
           </>
           : <div className='h-login' onClick={goLogin}>로그인</div>
       }

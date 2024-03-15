@@ -22,6 +22,15 @@ function MyPage() {
         navigate('/');
     }
 
+    const fetchDataFromServer = async () => {
+        try {
+            const response = await axios.get(`/api/user`); // Modify the URL according to your API endpoint
+            const userData = response.data; // Assuming the response contains user data
+            setCurrentUser(userData);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const handleMyInfoSubmit = async () => {
         console.log("내 정보 수정");
@@ -32,15 +41,15 @@ function MyPage() {
         data.append('Introduction', intro);
 
         let config = {
-            method: 'put',
-            method: 'put',
+            method: 'get',
             maxBodyLength: Infinity,
-            url: `/members/edit/${id}`,
+            url: `/api/user`,
             data: data
         };
 
         try {
             const res = await axios.request(config);
+            console.log("res: " + res)
         } catch (error) {
             console.error(error);
         }
@@ -48,15 +57,19 @@ function MyPage() {
 
     useEffect(() => {
         const fetchData = async () => {
-          const user = await getUserInfo();
-          setCurrentUser(user);
+            const user = await getUserInfo();
+            setCurrentUser(user);
+            if (user) {
+                setId(user.id); // Assuming user.id exists in your user object
+                await fetchDataFromServer();
+            }
         };
-    
+
         fetchData(); // 컴포넌트 마운트 시 호출
-    
+
         return () => {
         };
-      }, [getUserInfo]);
+    }, [getUserInfo]);
 
     return (
         <div className='wrap memo'>
@@ -85,17 +98,6 @@ function MyPage() {
                             disabled
                         />
                     </div>
-                    {/* <div className="form-group">
-                <label htmlFor="password">비밀번호</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder=''
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </div> */}
                     <div className="form-group">
                         <label htmlFor="intro">프로필 글</label>
                         <input
@@ -135,4 +137,4 @@ function MyPage() {
     )
 }
 
-export default MyPage
+export default MyPage;

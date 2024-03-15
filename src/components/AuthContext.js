@@ -35,9 +35,12 @@ export const AuthProvider = ({ children }) => {
         body: body,
       });
 
+      // access token이 유효한 경우
       if (response.status === 200 || response.status === 201) {
-        var user = await response.json(); // JSON 데이터 파싱
-        success(user); // 파싱된 데이터를 success 콜백에 전달
+        var user = await response.json();
+        success(user);
+
+      // access token이 만료된 경우
       } else if (response.status === 401 && getCookie('refresh_token')) {
         const res = await fetch('/api/token', {
           method: 'POST',
@@ -57,9 +60,13 @@ export const AuthProvider = ({ children }) => {
         } else {
           fail();
         }
+
+      // 로그인 되지 않은 경우
       } else {
         fail();
       }
+    
+    // 오류가 발생한 경우
     } catch (error) {
       fail();
     }
@@ -75,6 +82,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     function fail() {
+      userInfo = null;
     };
 
     await httpRequest('POST', '/api/userInfo', body, success, fail);
