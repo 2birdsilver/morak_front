@@ -2,6 +2,8 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import keyboard from '../images/keyword.png';
 import mouse from '../images/mouse.png';
+import anonymous from '../images/anonymous-icon3.png';
+import authenticated from '../images/authenticated-icon3.png';
 import Modal from '../components/MemoDetail';
 import PasswordModal from '../components/PasswordModal';
 // import axios from "axios";
@@ -15,7 +17,7 @@ function Memo() {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림/닫힘 상태 관리
   const [modalContent, setModalContent] = useState(''); // 모달에 표시될 내용 관리
   const [modalDate, setModalDate] = useState(''); // 모달에 표시될 날짜 관리
-  const [modalWriter, setModalWriter] = useState(''); 
+  const [modalWriter, setModalWriter] = useState('');
   const [modalShape, setModalShape] = useState('');  // 모달 모양(디자인) 상태 관리
   const [editingMemoId, setEditingMemoId] = useState(null);//수정 상태 관리
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
@@ -61,7 +63,7 @@ function Memo() {
       navigate('/print', { state: { memos: memos, name: name } });
     }
   }
-      
+
 
   // 메모 클릭 핸들러 함수
   const handleMemoClick = (memo) => {
@@ -93,7 +95,7 @@ function Memo() {
   };
 
   // 비밀번호 모달에서 확인을 눌렀을 때 실행될 함수
-  const handlePasswordConfirm = async (password) => { 
+  const handlePasswordConfirm = async (password) => {
     console.log("입력된 비밀번호:", password);
     console.log("입력된 메모id:", editingMemoId);
     // 비밀번호와 메모 ID를 서버에 전송
@@ -124,9 +126,9 @@ function Memo() {
       alert("메모 삭제 과정에서 오류가 발생했습니다.");
       // 네트워크 오류 또는 요청 실패 처리
     }
-    
+
     // 비밀번호 입력이 완료되면 모달을 닫음
-    setIsPasswordModalOpen(false); 
+    setIsPasswordModalOpen(false);
   };
 
 
@@ -151,7 +153,11 @@ function Memo() {
                 key={memo.id}
                 onClick={() => handleMemoClick(memo)}
               >
-                <div className='writer'>{memo.writer}</div>
+                <div className='writer'>
+                  {memo.authenticatedWriter && <img src={authenticated} alt="Authenticated" />}
+                  {/* {!memo.authenticatedWriter && <img src={anonymous} alt="anonymous" />} */}
+                  {memo.writer}
+                </div>
                 <div className='m-content'>{memo.content}</div>
               </div>
             ))}
@@ -175,12 +181,12 @@ function Memo() {
       )}
 
       {isPasswordModalOpen && (
-              <PasswordModal
-                isOpen={isPasswordModalOpen}
-                onClose={() => setIsPasswordModalOpen(false)}
-                onConfirm={handlePasswordConfirm}
-              />
-            )}
+        <PasswordModal
+          isOpen={isPasswordModalOpen}
+          onClose={() => setIsPasswordModalOpen(false)}
+          onConfirm={handlePasswordConfirm}
+        />
+      )}
 
       {/* 키보드와 마우스 이미지 */}
       <div className='km'>
