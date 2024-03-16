@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import naverloginbtn from '../images/naverloginbtn.png';
+import naverloginbtn from '../images/naverloginbtn2.png';
+import kakaotalkloginbtn from '../images/kakaotalk.png';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -33,7 +34,7 @@ function Login() {
     <div className='wrap memo'>
       <div className='login-form-container'>
         <h1>Login</h1>
-        <form className="login-form" onSubmit={handleLoginSubmit}>
+        {/* <form className="login-form" onSubmit={handleLoginSubmit}>
           <input
             type="text"
             id="email"
@@ -61,10 +62,16 @@ function Login() {
 
           </div>
 
-        </form>
-        <a href="http://localhost:8080/oauth2/authorization/naver">
-        <img className='naverloginbtn' src={naverloginbtn} alt="naverloginbtn" />
-        </a>
+        </form> */}
+        <button className='oauth-login-btn naver-login' onClick={() => window.location.href = 'http://localhost:8080/oauth2/authorization/naver'}>
+          <img className='oauth-login-img' src={naverloginbtn} alt="naverloginbtn" />
+          <p>네이버로 시작하기</p>
+        </button>
+
+        <button className='oauth-login-btn kakao-login'>
+          <img className='oauth-login-img' src={kakaotalkloginbtn} alt="kakaotalkloginbtn" />
+          <p>카카오톡으로 시작하기</p>
+        </button>
       </div>
     </div>
   )

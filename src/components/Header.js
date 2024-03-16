@@ -73,8 +73,9 @@ function Header() {
       <img src={logo} className='logo' alt="logo" />
       {
         currentUser ?
-          <>
-            <div className='mypage-icons' onClick={goMypage}>
+
+          <><div className='mypage-icons'>
+            <div onClick={goMypage}>
               {
                 currentUser ?
                   <img src={currentUser.avatarUrl} className='avatar' alt="inter-avatar" />
@@ -82,7 +83,9 @@ function Header() {
               }
               <div>{currentUser.name}</div>
             </div>
+            
             <div className='h-loginout' onClick={goLogout}>로그아웃</div>
+            </div>
             
           </>
           : <div className='h-login' onClick={goLogin}>로그인</div>

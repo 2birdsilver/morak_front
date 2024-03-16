@@ -15,9 +15,9 @@
 
   .mypage-icons {
     position: absolute;
-    top: 30px;
+    top: 10px;
     right: 15px;
-    padding: 10px 20px 0 0;
+    padding: 0 50px 0 0;
   }
 
   .mypage-icons:hover {
@@ -71,4 +71,17 @@
 
   .header .text {
     padding: 0 0 15px 0;
+  }
+
+  .h-loginout {
+    margin: 10px;
+
+    background-color: #fdda65;
+    padding: 7px;
+    border-radius: 5px;
+  }
+
+  .h-loginout:hover {
+    font-weight: bold;
+    cursor: pointer;
   }

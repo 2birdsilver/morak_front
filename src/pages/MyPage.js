@@ -16,11 +16,11 @@ function MyPage() {
     const [currentUser, setCurrentUser] = useState(null);
     const { getUserInfo } = useAuth();
 
-    const handleLogout = () => {
-        alert("로그아웃되었습니다.");
-        localStorage.clear();
-        navigate('/');
-    }
+    // const handleLogout = () => {
+    //     alert("로그아웃되었습니다.");
+    //     localStorage.clear();
+    //     navigate('/');
+    // }
 
     const fetchDataFromServer = async () => {
         try {
@@ -62,6 +62,7 @@ function MyPage() {
     //     }
     // }
 
+    // 사용자 정보 가져오기
     useEffect(() => {                                                             
         const fetchData = async () => {
             const user = await getUserInfo();
@@ -80,7 +81,7 @@ function MyPage() {
 
     return (
         <div className='wrap memo'>
-            <button className='logout-btn' onClick={handleLogout}>로그아웃</button>
+            {/* <button className='logout-btn' onClick={handleLogout}>로그아웃</button> */}
             <div className='post-form-container'>
                 <h1>마이페이지</h1>
                 <form className="post-form" onSubmit={getUserInfo}>
@@ -111,7 +112,7 @@ function MyPage() {
                             type="text"
                             id="intro"
                             name="intro"
-                            value={intro}
+                            value={currentUser ? currentUser.introduction : ''}
                             onChange={(e) => setIntro(e.target.value)}
                         />
                     </div>
