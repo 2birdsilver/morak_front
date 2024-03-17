@@ -58,7 +58,7 @@ function Postit() {
 
         if (user) {
             setCurrentUser(user);
-            setAuthenticatedWriter(true);
+            setAuthenticatedWriter(user.id);
         } else {
             setCurrentUser(null);
         }
@@ -77,10 +77,17 @@ function Postit() {
             authenticatedWriter
         };
 
+        const headData = {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+                'Content-Type': 'application/json',
+            }
+        };
+
         if (isEditing) {
             // 수정 로직
             axios
-                .put(`/api/memo/${memoId}`, memoData)
+                .put(`/api/memo/${memoId}`, memoData, headData)
                 .then((res) => {
                     alert("포스트잇 수정을 완료하였습니다.");
                     navigate(-1); // 또는 수정 후 보여줄 페이지로 이동
@@ -92,7 +99,7 @@ function Postit() {
         } else {
             // 등록 로직
             axios
-                .post("/api/memo", memoData)
+                .post("/api/memo", memoData, headData)
                 .then((res) => {
                     alert("포스트잇 등록을 완료하였습니다.");
                     navigate(-1);

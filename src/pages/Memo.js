@@ -103,6 +103,7 @@ function Memo() {
       const response = await fetch('/api/memo/delete', {
         method: 'POST', // 메소드를 DELETE로 변경
         headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('access_token'),
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
