@@ -155,7 +155,7 @@ function Memo() {
                 onClick={() => handleMemoClick(memo)}
               >
                 <div className='writer'>
-                  {memo.authenticatedWriter && <img src={authenticated} alt="Authenticated" />}
+                  {memo.authenticatedWriter > 0 && <img src={authenticated} alt="Authenticated" />}
                   {/* {!memo.authenticatedWriter && <img src={anonymous} alt="anonymous" />} */}
                   {memo.writer}
                 </div>

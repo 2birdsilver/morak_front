@@ -14,7 +14,7 @@ function Postit() {
 
     const { getUserInfo } = useAuth();
     const [currentUser, setCurrentUser] = useState(null);
-    const [authenticatedWriter, setAuthenticatedWriter] = useState(false);
+    const [authenticatedWriter, setAuthenticatedWriter] = useState(null);
 
     const [writer, setWriter] = useState('');
     const [password, setPassword] = useState('');
