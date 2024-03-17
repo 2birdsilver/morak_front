@@ -68,7 +68,7 @@ function Login() {
           <p>네이버로 시작하기</p>
         </button>
 
-        <button className='oauth-login-btn kakao-login'>
+        <button className='oauth-login-btn kakao-login' onClick={() => window.location.href = 'http://localhost:8080/oauth2/authorization/kakao'}>
           <img className='oauth-login-img' src={kakaotalkloginbtn} alt="kakaotalkloginbtn" />
           <p>카카오톡으로 시작하기</p>
         </button>
