@@ -135,7 +135,7 @@ function MyPage() {
                 />
             </div>
             <div className="form-buttons">
-                <button type="submit" className="p-btn my-btn">수정</button>  
+                <button type="submit" className="p-btn my-btn">수정</button>
             </div>
             </form>
         </div>
