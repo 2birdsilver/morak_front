@@ -9,14 +9,15 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLoginSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             195861
     try {
-      const res = await axios.post('http://localhost:8080/auth/login', {
+      const res = await axios.post('/auth/login', {
         email,
         password,
       });
       alert("로그인 성공"); 
       localStorage.clear();
+
       localStorage.setItem("id", res.data.id)
       localStorage.setItem("name", res.data.name);
       localStorage.setItem("url",res.data.avatarUrl);
