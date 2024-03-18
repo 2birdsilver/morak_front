@@ -38,7 +38,8 @@
   }
 
   .avatar:hover {
-    border: 2px solid #eebf23;;
+    box-shadow: #fd8365;
+    border: 1px solid #52514e;;
   }
 
   .header .h-login {
