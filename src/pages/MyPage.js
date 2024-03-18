@@ -1,69 +1,75 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function MyPage() {
 
  const navigate = useNavigate();
-  const [id, setId] = useState();
+  const userId = localStorage.getItem("id");
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [intro, setIntro] = useState('');
-  const [keyboard, setKeyboard] = useState('');
-  const [mouse, setMouse] = useState('');
+//   const [birthday, setBirthday] = useState('');
+//   const [mobile, setMobile] = useState('');
+  const [keyboard, setKeyboard] = useState(null);
+  const [mouse, setMouse] = useState(null);
 
 
-  const fetchUserInfo = () => {
-    axios.get(`/members/${id}`)
+  const fetchUserInfo = useCallback(() => {
+    axios.get(`/members/${userId}`)
         .then((res) =>{
-            const {name, email, introduction, keyboard, mouse} = res.data;
-            console.log(res.data);
+            const {name, email, introduction} = res.data;
             setName(name);
             setEmail(email);
             setIntro(introduction);
-            setKeyboard(keyboard);
-            setMouse(mouse);
         })
         .catch((err) => console.error("Error fetching memo data:", err));
-  }
-
-  useEffect(() => {
-    setId(localStorage.getItem("id"));
-  }, []);
+  },[userId]);
 
   useEffect(()=>{
     fetchUserInfo();
-  },[id]);
+  },[fetchUserInfo]);
 
   const handleLogout = () => {
     alert("로그아웃되었습니다.");
     localStorage.clear();
-    navigate('/');
+    navigate('/', {state : false});
   }
 
 
-  const handleMyInfoSubmit = async () => {
-    console.log("내 정보 수정");
+  const handleMyInfoSubmit = async (e) => {
+    if (password === '') {
+      alert("비밀번호를 입력하세요.");
+      return;
+    }
+    e.preventDefault(); 
 
-     // 리뷰 수정 데이터 보내기
+     // 내 정보 수정
      let data = new FormData();
-     data.append('id', id);
-     data.append('Introduction', intro);
+     data.append('userId', userId);
+     data.append("password", password);
+     data.append('introduction', intro);
+     if (keyboard) data.append("keyboard", keyboard);
+     if (mouse) data.append("mouse", mouse);
 
      let config = {
-      method: 'put',
-      method: 'put',
+      method: 'post',
       maxBodyLength: Infinity,
-      url: `/members/edit/${id}`,
-      data: data
+      url: `/auth/myinfo/update`,
+      data: data,
      };
 
-     try {
-        const res = await axios.request(config);
-    } catch (error) {
-        console.error(error);
-    }
+     axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        alert("정보가 수정되었습니다.")
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("정보 수정에 실패하였습니다.")
+      });
+
   }
 
   return (
@@ -99,7 +105,7 @@ function MyPage() {
                     type="password"
                     id="password"
                     name="password"
-                    placeholder=''
+                    placeholder='비밀번호를 입력하세요'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
@@ -117,22 +123,25 @@ function MyPage() {
             <div className="form-group">
                 <label htmlFor="keyboard">내 키보드</label>
                 <input
-                type="file"
+                    type="file"
                     id="keyboard"
                     name="keyboard"
-                    value={keyboard}
-                    onChange={(e) => setKeyboard(e.target.value)}
+                    onChange={(e) => setKeyboard(e.target.files[0])}
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="intro">내 마우스</label>
+                <label htmlFor="mouse">내 마우스</label>
                 <input
-                type="file"
+                    type="file"
                     id="mouse"
                     name="mouse"
-                    value={mouse}
-                    onChange={(e) => setMouse(e.target.value)}
+                    onChange={(e) => setMouse(e.target.files[0])}
                 />
+            </div>
+            <div className='fileText'>
+              <div>⚠ 1MB 이하 이미지를 첨부해주세요.</div>
+              <div>⚠ 키보드는 가로가 더 긴 이미지로</div>
+              <div>⚠ 배경을 제거하는 것을 추천</div>
             </div>
             <div className="form-buttons">
                 <button type="submit" className="p-btn my-btn">수정</button>

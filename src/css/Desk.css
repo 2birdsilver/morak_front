@@ -9,6 +9,7 @@
   
   .member:hover {
     cursor: pointer;
+    background-color: rgb(250, 249, 199);
   }
   
   .member::after {
@@ -19,6 +20,7 @@
     border-radius: 3px;
     position: absolute;
   }
+
   
   @media screen and (max-width: 760px) {
     .member::after {
@@ -35,7 +37,7 @@
     z-index: 1;
     border: 1px solid rgb(203, 199, 199);
   }
-  
+
   .member .intern {
     position: relative;
     top: -10px;
