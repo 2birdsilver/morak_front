@@ -3,8 +3,16 @@
   }
   
   .writer {
-    display: inline;
+    display: flex;
     font-weight: bold;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .writer > img {
+    width: 15px;
+    margin-right: 5px;
   }
 
   .m-content {
