@@ -17,23 +17,22 @@ function MyPage() {
     const { getUserInfo } = useAuth();
 
 
-    // 내 정보 수정
     const handleMyInfoSubmit = async (e) => {
-        if (password === '') {
-            alert("비밀번호를 입력하세요.");
-            return;
-        }
         e.preventDefault();
 
+        // 내 정보 수정
         let data = new FormData();
-        data.append('userId', userId);
-        data.append("password", password);
+        data.append('userId', currentUser.id);
         data.append('introduction', intro);
         if (keyboard) data.append("keyboard", keyboard);
         if (mouse) data.append("mouse", mouse);
 
         let config = {
-            method: 'post',
+            method: 'POST', // POST 메서드로 변경
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+                'Content-Type': 'multipart/form-data', // 데이터 형식을 multipart/form-data로 설정
+            },
             maxBodyLength: Infinity,
             url: `/auth/myinfo/update`,
             data: data,
@@ -48,7 +47,6 @@ function MyPage() {
                 console.log(error);
                 alert("정보 수정에 실패하였습니다.")
             });
-
     }
 
 
@@ -59,7 +57,6 @@ function MyPage() {
             setCurrentUser(user);
             if (user) {
                 setId(user.id);
-                await fetchDataFromServer();
             }
         };
 
@@ -74,7 +71,7 @@ function MyPage() {
             {/* <button className='logout-btn' onClick={handleLogout}>로그아웃</button> */}
             <div className='post-form-container'>
                 <h1>마이페이지</h1>
-                <form className="post-form" onSubmit={getUserInfo}>
+                <form className="post-form" onSubmit={handleMyInfoSubmit}>
                     <div className="form-group">
                         <label htmlFor="name">이름</label>
                         <input
@@ -102,7 +99,9 @@ function MyPage() {
                             type="text"
                             id="intro"
                             name="intro"
-                            value={currentUser ? currentUser.introduction : ''}
+                            // value={currentUser ? currentUser.introduction : ''}
+                            placeholder={currentUser ? currentUser.introduction : ''}
+                            value={intro}
                             onChange={(e) => setIntro(e.target.value)}
                         />
                     </div>
