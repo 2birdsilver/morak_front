@@ -30,11 +30,9 @@ function Header() {
 
       if (user) {
         setCurrentUser(user);
-        setIsLogin(true);
 
       } else {
         setCurrentUser(null);
-        setIsLogin(false);
       }
     };
 
