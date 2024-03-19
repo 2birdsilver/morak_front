@@ -16,6 +16,7 @@ function MyPage() {
     const [currentUser, setCurrentUser] = useState(null);
     const { getUserInfo } = useAuth();
 
+    const maxLength = 50;
 
     const handleMyInfoSubmit = async (e) => {
         e.preventDefault();
@@ -99,6 +100,7 @@ function MyPage() {
                             type="text"
                             id="intro"
                             name="intro"
+                            maxLength={maxLength}
                             // value={currentUser ? currentUser.introduction : ''}
                             placeholder={currentUser ? currentUser.introduction : ''}
                             value={intro}
