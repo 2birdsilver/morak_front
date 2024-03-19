@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import axios from "axios";
+import React from 'react'
 import naverloginbtn from '../images/naverloginbtn2.png';
-import kakaotalkloginbtn from '../images/kakaotalk.png';
+// import kakaotalkloginbtn from '../images/kakaotalk.png';
 
 function Login() {
 
@@ -15,10 +13,10 @@ function Login() {
           <p>네이버로 시작하기</p>
         </button>
 
-        <button className='oauth-login-btn kakao-login' onClick={() => window.location.href = '/oauth2/authorization/kakao'}>
+        {/* <button className='oauth-login-btn kakao-login' onClick={() => window.location.href = '/oauth2/authorization/kakao'}>
           <img className='oauth-login-img' src={kakaotalkloginbtn} alt="kakaotalkloginbtn" />
           <p>카카오톡으로 시작하기</p>
-        </button>
+        </button> */}
       </div>
     </div>
   )

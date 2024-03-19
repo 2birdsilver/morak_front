@@ -1,15 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../components/AuthContext';
 
 function MyPage() {
 
-    const navigate = useNavigate();
-    const [id, setId] = useState();
-    const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
-    const [password, setPassword] = useState('');
     const [intro, setIntro] = useState('');
     const [keyboard, setKeyboard] = useState('');
     const [mouse, setMouse] = useState('');
@@ -56,9 +50,6 @@ function MyPage() {
         const fetchData = async () => {
             const user = await getUserInfo();
             setCurrentUser(user);
-            if (user) {
-                setId(user.id);
-            }
         };
 
         fetchData();
