@@ -24,7 +24,8 @@ function Desk({ member, onClick }) {
     };
   
     // 모달 닫기 핸들러
-    const handleCloseModal = () => {
+    const handleCloseModal = (e) => {
+      e.stopPropagation(); 
       setIsModalOpen(false);
     };
 
