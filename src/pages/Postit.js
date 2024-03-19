@@ -16,6 +16,7 @@ function Postit() {
     const [currentUser, setCurrentUser] = useState(null);
     const [authenticatedWriter, setAuthenticatedWriter] = useState(null);
 
+    
     const [writer, setWriter] = useState('');
     const [password, setPassword] = useState('');
     const [content, setContent] = useState('');
@@ -26,6 +27,7 @@ function Postit() {
     const [memoId, setMemoId] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
+    const maxWriterLength = 20;
     const maxLength = 255;
 
     useEffect(() => {
@@ -135,6 +137,7 @@ function Postit() {
                                 id="nickname"
                                 name="writer"
                                 value={writer}
+                                maxLength={maxWriterLength}
                                 onChange={(e) => setWriter(e.target.value)}
                             />
                         )}
