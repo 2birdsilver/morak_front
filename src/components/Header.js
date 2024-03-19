@@ -8,10 +8,6 @@ function Header() {
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
   const { getUserInfo } = useAuth();
-  const [isLogin, setIsLogin] = useState(false);
-  const [id, setId] = useState('');
-  const [name, setName] = useState('');
-  const [url, setUrl] = useState('');
   const location = useLocation();
 
   useEffect(() => {
