@@ -23,7 +23,7 @@ function MyPage() {
         // 내 정보 수정
         let data = new FormData();
         data.append('userId', currentUser.id);
-        data.append('introduction', intro);
+        data.append('introduction', intro ? intro : currentUser.introduction);
         if (keyboard) data.append("keyboard", keyboard);
         if (mouse) data.append("mouse", mouse);
 
