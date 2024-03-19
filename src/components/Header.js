@@ -20,6 +20,7 @@ function Header() {
     const token = searchParam('token');
     if (token) {
       localStorage.setItem("access_token", token);
+      window.location.href = "/";
     }
 
     function searchParam(key) {
