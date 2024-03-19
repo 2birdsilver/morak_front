@@ -31,7 +31,7 @@ function MyPage() {
             method: 'POST', // POST 메서드로 변경
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-                'Content-Type': 'multipart/form-data', // 데이터 형식을 multipart/form-data로 설정
+                'Content-Type': 'multipart/form-data',
             },
             maxBodyLength: Infinity,
             url: `/auth/myinfo/update`,
@@ -105,24 +105,24 @@ function MyPage() {
                             onChange={(e) => setIntro(e.target.value)}
                         />
                     </div>
+
                     <div className="form-group">
                         <label htmlFor="keyboard">내 키보드</label>
                         <input
                             type="file"
                             id="keyboard"
                             name="keyboard"
-                            value={keyboard}
-                            onChange={(e) => setKeyboard(e.target.value)}
+                            onChange={(e) => setKeyboard(e.target.files[0])}
                         />
                     </div>
+
                     <div className="form-group">
-                        <label htmlFor="intro">내 마우스</label>
+                        <label htmlFor="mouse">내 마우스</label>
                         <input
                             type="file"
                             id="mouse"
                             name="mouse"
-                            value={mouse}
-                            onChange={(e) => setMouse(e.target.value)}
+                            onChange={(e) => setMouse(e.target.files[0])}
                         />
                     </div>
 
