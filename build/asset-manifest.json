@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2dd59586.css",
+    "main.js": "/static/js/main.0ee95c4a.js",
+    "static/js/453.4fe5cef5.chunk.js": "/static/js/453.4fe5cef5.chunk.js",
+    "static/media/omyu pretty.ttf": "/static/media/omyu pretty.a709da7b5fd009ebd794.ttf",
+    "static/media/gang-wongyoyughyeon-ogsaem.ttf": "/static/media/gang-wongyoyughyeon-ogsaem.47b6669012a754bd06ac.ttf",
+    "static/media/TheJamsil3Regular.ttf": "/static/media/TheJamsil3Regular.65c3e10f005c849f4509.ttf",
+    "static/media/TheJamsil5Bold.ttf": "/static/media/TheJamsil5Bold.a7b23196c7e6243eeb68.ttf",
+    "static/media/keyboard.png": "/static/media/keyboard.0f23327a39b782525a22.png",
+    "static/media/mouse.png": "/static/media/mouse.b0e0e2bdd46f3e35fb82.png",
+    "static/media/authenticated-icon3.png": "/static/media/authenticated-icon3.f306c52678eeef9af6d6.png",
+    "static/media/anonymous-icon3.png": "/static/media/anonymous-icon3.8d3f6183020303f29434.png",
+    "index.html": "/index.html",
+    "main.2dd59586.css.map": "/static/css/main.2dd59586.css.map",
+    "main.0ee95c4a.js.map": "/static/js/main.0ee95c4a.js.map",
+    "453.4fe5cef5.chunk.js.map": "/static/js/453.4fe5cef5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2dd59586.css",
+    "static/js/main.0ee95c4a.js"
+  ]
+}
