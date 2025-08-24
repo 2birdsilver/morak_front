@@ -1,30 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import Desk from '../components/Desk.js';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useEffect, useState } from "react";
+import Desk from "../components/Desk.js";
+import MemoList from "./MemoList.js";
+import { useNavigate } from "react-router-dom";
+import memoApi, { getMainMemos } from "../api/memoApi.js";
 
 function Home() {
   const [members, setMembers] = useState([]);
+  const [memos, setMemos] = useState([]);
   const navigate = useNavigate();
 
-  const goToMemos = (member) => {
-    navigate(`/memo/${member.id}`);
-  };
+  // const goToMemos = (memo) => {
+  //   navigate(`/memo/${member.id}`);
+  // };
 
   useEffect(() => {
-    fetch('/members')
-      .then((response) => response.json())
-      .then((data) => setMembers(data))
-      .catch((error) => console.error("Fetching members failed", error));
-
+    getMainMemos().then((data) => setMemos(data));
   }, []);
 
   return (
     <div className="wrap">
-      <div className='container'>
-        {members.map((member) => (
-          <Desk key={member.id} member={member} onClick={() => goToMemos(member)} />
-        ))}
+      <div className="container">
+        <MemoList memoList={memos} />
       </div>
     </div>
   );

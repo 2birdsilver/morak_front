@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import logo from '../images/kccic.png';
-import mypage from '../images/person.png';
-import { useAuth } from '../components/AuthContext';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import mypage from "../images/person.png";
+import { useAuth } from "../components/AuthContext";
 
 function Header() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -11,9 +10,8 @@ function Header() {
   const location = useLocation();
 
   useEffect(() => {
-
     // 쿼리 파라미터로 받은 access token을 local storage에 저장
-    const token = searchParam('token');
+    const token = searchParam("token");
     if (token) {
       localStorage.setItem("access_token", token);
       window.location.href = "/";
@@ -25,12 +23,10 @@ function Header() {
 
     // access token으로 서버에 사용자 정보 요청
     const updateProfile = async () => {
- 
       const user = await getUserInfo();
 
       if (user) {
         setCurrentUser(user);
-
       } else {
         setCurrentUser(null);
       }
@@ -45,51 +41,58 @@ function Header() {
   }, [location, getUserInfo]);
 
   const goToHome = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const goLogin = () => {
-    navigate('/login');
+    navigate("/login");
   };
 
   const goMypage = () => {
-    navigate('/mypage');
+    navigate("/mypage");
   };
 
   // 로그아웃
   const goLogout = () => {
-    localStorage.removeItem('access_token');
-    document.cookie = 'refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    window.location.href = '/';
-};
+    localStorage.removeItem("access_token");
+    document.cookie =
+      "refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.href = "/";
+  };
 
   return (
-    <div className='header'>
-      <img src={logo} className='logo' alt="logo" />
-      {
-        currentUser ?
-
-          <><div className='mypage-icons'>
+    <div className="header">
+      {currentUser ? (
+        <>
+          <div className="mypage-icons">
             <div onClick={goMypage}>
-              {
-                currentUser ?
-                  <img src={currentUser.avatarUrl} className='avatar' alt="inter-avatar" />
-                  : <img src={mypage} className='mypage-icon' alt="mypage-icon" />
-              }
+              {currentUser ? (
+                <img
+                  src={currentUser.avatarUrl}
+                  className="avatar"
+                  alt="inter-avatar"
+                />
+              ) : (
+                <img src={mypage} className="mypage-icon" alt="mypage-icon" />
+              )}
               <div>{currentUser.name}</div>
             </div>
-            
-            <div className='h-loginout' onClick={goLogout}>로그아웃</div>
-            </div>
-            
-          </>
-          : <div className='h-login' onClick={goLogin}>로그인</div>
-      }
 
-      <div className='title' onClick={goToHome}>
-        Happy Desk
+            <div className="h-loginout" onClick={goLogout}>
+              로그아웃
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="h-login" onClick={goLogin}>
+          로그인
+        </div>
+      )}
+
+      <div className="title" onClick={goToHome}>
+        모락 (모두의 낙서)
       </div>
-      <div className='text'>포스트잇으로 메모를 남겨보세요!</div>
+      <div className="text">자유롭게 메모를 남겨보세요!</div>
     </div>
   );
 }

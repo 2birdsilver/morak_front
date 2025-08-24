@@ -1,87 +1,94 @@
+@font-face {
+  font-family: "Cafe24PROUP";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2507-1@1.0/Cafe24PROUP.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .header {
-    text-align: center;
-    width: 100%;
-    background-color: #ffeaa7;
-  }
-  
- 
-  .header .logo {
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    height: 25px;
-    padding: 10px 0 0 10px;
-  }
+  text-align: center;
+  width: 100%;
+  background-color: #ffeaa7;
+}
 
-  .mypage-icons {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-  }
+.header .logo {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  height: 25px;
+  padding: 10px 0 0 10px;
+}
 
-  .mypage-icons:hover {
-    cursor: pointer;
-  }
+.mypage-icons {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
 
-  .mypage-icon {
-    height: 30px;
-  }
+.mypage-icons:hover {
+  cursor: pointer;
+}
 
-  .mypage-icon:hover {
-    height: 33px;
-  }
+.mypage-icon {
+  height: 30px;
+}
 
-  .avatar {
-    height: 40px;
-    border-radius: 50%;
-  }
+.mypage-icon:hover {
+  height: 33px;
+}
 
-  .avatar:hover {
-    box-shadow: #fd8365;
-    border: 1px solid #52514e;;
-  }
+.avatar {
+  height: 40px;
+  border-radius: 50%;
+}
 
-  .header .h-login {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    padding: 10px 20px 0 0;
-    font-size: large;
+.avatar:hover {
+  box-shadow: #fd8365;
+  border: 1px solid #52514e;
+}
 
-    background-color: #fdda65;
-    padding: 7px;
-    border-radius: 5px;
-  }
+.header .h-login {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 10px 20px 0 0;
+  font-size: large;
 
-  .header .h-login:hover {
-    font-weight: bold;
-    cursor: pointer;
-  }
+  background-color: #fdda65;
+  padding: 7px;
+  border-radius: 5px;
+}
 
-  .header .title:hover {
-    cursor: pointer;
-    color: rgb(252, 253, 231);
-  }
-  
-  .header .title {
-    font-size: xx-large;
-    font-family: "LOTTERIACHAB";
-    padding: 30px 0 15px 0;
-  }
+.header .h-login:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
 
-  .header .text {
-    padding: 0 0 15px 0;
-  }
+.header .title:hover {
+  cursor: pointer;
+  color: rgb(252, 253, 231);
+}
 
-  .h-loginout {
-    margin: 10px;
+.header .title {
+  font-size: xx-large;
+  font-family: "Cafe24PROUP";
+  padding: 30px 0 15px 0;
+}
 
-    background-color: #fdda65;
-    padding: 7px;
-    border-radius: 5px;
-  }
+.header .text {
+  padding: 0 0 15px 0;
+}
 
-  .h-loginout:hover {
-    font-weight: bold;
-    cursor: pointer;
-  }
+.h-loginout {
+  margin: 10px;
+
+  background-color: #fdda65;
+  padding: 7px;
+  border-radius: 5px;
+}
+
+.h-loginout:hover {
+  font-weight: bold;
+  cursor: pointer;
+}

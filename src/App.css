@@ -1,11 +1,16 @@
 .wrap {
   text-align: center;
   margin: 0 auto;
-  max-width: 800px;
   min-height: 100%;
-  padding-bottom: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+html,
+body,
+#root,
+.app {
+  height: 100%;
+  margin: 0;
+}
