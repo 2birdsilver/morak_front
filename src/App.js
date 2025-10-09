@@ -23,7 +23,7 @@ import { AuthProvider } from "./components/AuthContext";
 import Logout from "./components/Logout";
 import MemoForm from "./components/MemoForm";
 import MemoDetail from "./pages/MemoDetail";
-import Memopad from "./pages/memopad";
+import Memopad from "./pages/Memopad";
 
 function App() {
   return (
