@@ -10,7 +10,6 @@ import mouseBased from "../images/mouse.png";
 import Memo from "../components/Memo";
 
 function MemoList({ memoList }) {
-  const { id } = useParams(); // URL에서 id 값을 가져오기
   const navigate = useNavigate(); // 페이지 네비게이션을 위한 Hook
   const [memos, setMemos] = useState([]); // 메모 목록 상태 관리
   const [name, setName] = useState(""); // 사용자 이름 상태 관리
@@ -27,7 +26,7 @@ function MemoList({ memoList }) {
   useEffect(() => {}, []);
 
   // 메모 작성 페이지로 이동하는 함수
-  const goToCreateMemo = () => {
+  const goToCreateMemo = (id) => {
     navigate(`/postit/${id}/`);
   };
 

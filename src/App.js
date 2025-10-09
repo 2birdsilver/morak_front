@@ -21,7 +21,9 @@ import Login from "./pages/Login";
 import MyPage from "./pages/MyPage";
 import { AuthProvider } from "./components/AuthContext";
 import Logout from "./components/Logout";
+import MemoForm from "./components/MemoForm";
 import MemoDetail from "./pages/MemoDetail";
+import Memopad from "./pages/memopad";
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
           <Route path="/print" element={<Print />} />
           <Route path="/login" element={<Login />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/memo/create" element={<MemoForm />} />
+          <Route path="/memopad/:memopadId" element={<Memopad />} />
         </Routes>
         <Footer />
       </AuthProvider>

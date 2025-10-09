@@ -3,7 +3,7 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../components/AuthContext";
 
-function MemoDetail() {
+function MemoForm() {
   const params = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -247,4 +247,4 @@ function MemoDetail() {
   );
 }
 
-export default MemoDetail;
+export default MemoForm;
