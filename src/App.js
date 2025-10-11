@@ -1,5 +1,8 @@
 import React from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
+import styled from "styled-components";
+
+// css
 import "./App.css";
 import "../src/css/Desk.css";
 import "../src/css/Footer.css";
@@ -12,6 +15,8 @@ import "../src/css/Print.css";
 import "../src/css/Login.css";
 import "../src/css/Mypage.css";
 import "../src/css/Comment.css";
+
+// page
 import Home from "./pages/Home";
 import Memo from "./pages/MemoList";
 import Print from "./pages/Print";

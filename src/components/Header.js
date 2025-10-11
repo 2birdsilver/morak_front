@@ -14,7 +14,10 @@ function Header() {
     const path = location.pathname;
 
     // signup 페이지라면 redirect 로직 무시
-    if (path.includes("signup")) return;
+    if (path.includes("signup")) {
+      window.location.href = "/#/signup";
+      return;
+    }
 
     // 쿼리 파라미터로 받은 access token을 local storage에 저장
     const token = searchParam("token");

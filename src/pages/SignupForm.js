@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 import { useAuth } from "../components/AuthContext";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  align-items: center;
+  height: 100%;
+  display: flex;
+`;
 
 function SignupForm() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -17,6 +24,7 @@ function SignupForm() {
   };
 
   const [formData, setFormData] = useState({
+    userid: "",
     username: "",
     email: "",
     password: "",
@@ -37,6 +45,7 @@ function SignupForm() {
   // 폼 유효성 검사
   const validate = () => {
     const newErrors = {};
+    if (!formData.userid.trim()) newErrors.userid = "아이디를 입력해주세요.";
     if (!formData.username.trim()) newErrors.username = "이름을 입력해주세요.";
     if (!formData.email.includes("@"))
       newErrors.email = "이메일 형식이 올바르지 않습니다.";
@@ -62,68 +71,79 @@ function SignupForm() {
   };
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.title}>회원가입</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <label style={styles.label}>이름</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          style={styles.input}
-        />
-        {errors.username && <p style={styles.error}>{errors.username}</p>}
+    <Wrapper>
+      <div style={styles.container}>
+        <h2 style={styles.title}>회원가입</h2>
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <label style={styles.label}>아이디</label>
+          <input
+            type="text"
+            name="userid"
+            value={formData.userid}
+            onChange={handleChange}
+            style={styles.input}
+          />
+          {errors.userid && <p style={styles.error}>{errors.userid}</p>}
 
-        <label style={styles.label}>이메일</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          style={styles.input}
-        />
-        {errors.email && <p style={styles.error}>{errors.email}</p>}
+          <label style={styles.label}>이름</label>
+          <input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            style={styles.input}
+          />
+          {errors.username && <p style={styles.error}>{errors.username}</p>}
 
-        <label style={styles.label}>비밀번호</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          style={styles.input}
-        />
-        {errors.password && <p style={styles.error}>{errors.password}</p>}
+          <label style={styles.label}>이메일</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            style={styles.input}
+          />
+          {errors.email && <p style={styles.error}>{errors.email}</p>}
 
-        <label style={styles.label}>비밀번호 확인</label>
-        <input
-          type="password"
-          name="confirmPassword"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          style={styles.input}
-        />
-        {errors.confirmPassword && (
-          <p style={styles.error}>{errors.confirmPassword}</p>
-        )}
+          <label style={styles.label}>비밀번호</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            style={styles.input}
+          />
+          {errors.password && <p style={styles.error}>{errors.password}</p>}
 
-        <button type="submit" style={styles.button}>
-          회원가입
-        </button>
-      </form>
-    </div>
+          <label style={styles.label}>비밀번호 확인</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            style={styles.input}
+          />
+          {errors.confirmPassword && (
+            <p style={styles.error}>{errors.confirmPassword}</p>
+          )}
+
+          <button type="submit" style={styles.button}>
+            회원가입
+          </button>
+        </form>
+      </div>
+    </Wrapper>
   );
 }
 
 // 간단한 인라인 스타일
 const styles = {
   container: {
-    width: "350px",
+    width: "500px",
     margin: "50px auto",
-    padding: "20px",
-    border: "1px solid #ddd",
+    padding: "50px",
+    border: "10px solid tan",
     borderRadius: "10px",
-    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
   },
   title: {
     textAlign: "center",
@@ -132,6 +152,7 @@ const styles = {
   form: {
     display: "flex",
     flexDirection: "column",
+    gap: "10px",
   },
   label: {
     marginBottom: "5px",
@@ -144,12 +165,13 @@ const styles = {
     border: "1px solid #ccc",
   },
   button: {
-    backgroundColor: "#4CAF50",
+    backgroundColor: "#4c2a2a",
     color: "white",
     border: "none",
     padding: "10px",
     borderRadius: "5px",
     cursor: "pointer",
+    margin: "10px 0px 10px 0px",
   },
   error: {
     color: "red",
