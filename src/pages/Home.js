@@ -25,7 +25,7 @@ function Home() {
 
   // 낙서장 페이지로 이동하는 함수
   const goToCreateMemopad = () => {
-    navigate(`/memopad/{memopadId}`);
+    navigate(`/memopad/{userId}`);
   };
 
   return (

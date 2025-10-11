@@ -24,6 +24,7 @@ import Logout from "./components/Logout";
 import MemoForm from "./components/MemoForm";
 import MemoDetail from "./pages/MemoDetail";
 import Memopad from "./pages/Memopad";
+import SignupForm from "./pages/SignupForm";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/memo/create" element={<MemoForm />} />
           <Route path="/memopad/:memopadId" element={<Memopad />} />
+          <Route path="/signup" element={<SignupForm />} />
         </Routes>
         <Footer />
       </AuthProvider>
