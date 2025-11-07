@@ -2,8 +2,8 @@
 .comments-section {
   margin: 25px;
   padding: 20px;
-  border-top: 1px solid #ddd;
-  background-color: #fafafa;
+  border: 1px solid #ffd84d;
+  background-color: #fffae6;
   border-radius: 10px;
   width: 1000px;
 }
@@ -68,6 +68,7 @@
   border-radius: 6px;
   outline: none;
   font-size: 14px;
+  height: 30px;
 }
 
 .comment-form input:focus {
@@ -76,15 +77,44 @@
 
 .comment-form button {
   padding: 10px 15px;
-  background-color: #007bff;
+  background-color: #4d3e00;
   border: none;
   color: #fff;
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.2s ease-in-out;
+  width: 100px;
+  height: 50px;
 }
 
 .comment-form button:hover {
   background-color: #0056b3;
+}
+
+/* textarea 스타일 */
+.comment-form textarea {
+  width: 70%;
+  resize: vertical;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  height: 30px;
+}
+
+.comment-form textarea:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+/* input과 textarea placeholder를 통일 */
+input::placeholder,
+textarea::placeholder {
+  color: #999; /* 같은 색상 */
+  font-size: 14px; /* 같은 크기 */
+  font-family: "omyu-pretty"; /* 같은 폰트 패밀리 */
+  opacity: 1; /* 크롬/사파리에서 투명도 조정 방지 */
 }

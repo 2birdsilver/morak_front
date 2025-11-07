@@ -1,5 +1,8 @@
 import React from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
+import styled from "styled-components";
+
+// css
 import "./App.css";
 import "../src/css/Desk.css";
 import "../src/css/Footer.css";
@@ -12,6 +15,8 @@ import "../src/css/Print.css";
 import "../src/css/Login.css";
 import "../src/css/Mypage.css";
 import "../src/css/Comment.css";
+
+// page
 import Home from "./pages/Home";
 import Memo from "./pages/MemoList";
 import Print from "./pages/Print";
@@ -21,7 +26,10 @@ import Login from "./pages/Login";
 import MyPage from "./pages/MyPage";
 import { AuthProvider } from "./components/AuthContext";
 import Logout from "./components/Logout";
+import MemoForm from "./components/MemoForm";
 import MemoDetail from "./pages/MemoDetail";
+import Memopad from "./pages/Memopad";
+import SignupForm from "./pages/SignupForm";
 
 function App() {
   return (
@@ -38,6 +46,9 @@ function App() {
           <Route path="/print" element={<Print />} />
           <Route path="/login" element={<Login />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/memo/create" element={<MemoForm />} />
+          <Route path="/memopad/:memopadId" element={<Memopad />} />
+          <Route path="/signup" element={<SignupForm />} />
         </Routes>
         <Footer />
       </AuthProvider>

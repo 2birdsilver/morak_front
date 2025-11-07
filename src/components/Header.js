@@ -10,6 +10,9 @@ function Header() {
   const location = useLocation();
 
   useEffect(() => {
+    // 현재 페이지 경로 확인
+    const path = location.pathname;
+
     // 쿼리 파라미터로 받은 access token을 local storage에 저장
     const token = searchParam("token");
     if (token) {
@@ -32,13 +35,19 @@ function Header() {
       }
     };
 
+    // signup 페이지라면 redirect 로직 무시
+    if (path.includes("signup")) {
+      window.location.href = "/#/signup";
+      return;
+    }
+
     updateProfile(); // 컴포넌트 마운트 시 호출
     window.addEventListener("loginSuccess", updateProfile); // 사용자 정의 이벤트 리스너 추가
 
     return () => {
       window.removeEventListener("loginSuccess", updateProfile); // 컴포넌트 언마운트 시 리스너 제거
     };
-  }, [location, getUserInfo]);
+  }, [currentUser]);
 
   const goToHome = () => {
     navigate("/");
@@ -66,15 +75,6 @@ function Header() {
         <>
           <div className="mypage-icons">
             <div onClick={goMypage}>
-              {currentUser ? (
-                <img
-                  src={currentUser.avatarUrl}
-                  className="avatar"
-                  alt="inter-avatar"
-                />
-              ) : (
-                <img src={mypage} className="mypage-icon" alt="mypage-icon" />
-              )}
               <div>{currentUser.name}</div>
             </div>
 
