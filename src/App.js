@@ -26,7 +26,7 @@ import Login from "./pages/Login";
 import MyPage from "./pages/MyPage";
 import { AuthProvider } from "./components/AuthContext";
 import Logout from "./components/Logout";
-import MemoForm from "./components/MemoForm";
+import MemoForm from "./pages/MemoForm";
 import MemoDetail from "./pages/MemoDetail";
 import Memopad from "./pages/Memopad";
 import SignupForm from "./pages/SignupForm";

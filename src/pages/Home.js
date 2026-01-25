@@ -34,9 +34,9 @@ function Home() {
         <button className="add-memo" onClick={goToCreateMemo}>
           낙서하기
         </button>
-        <button className="memopad" onClick={goToCreateMemopad}>
+        {/* <button className="memopad" onClick={goToCreateMemopad}>
           내 낙서장
-        </button>
+        </button> */}
 
         <MemoList memoList={memos} />
       </div>

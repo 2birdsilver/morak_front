@@ -10,11 +10,30 @@ export async function getMainMemos() {
   return response.json();
 }
 
-// 메모 조회
+// 메모 조회(메모ID)
 export async function getMemoById({ id }) {
   try {
     const response = await fetch(`/api/memo/${id}`);
 
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw errorData;
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("에러 발생:", error); // 객체 전체
+    console.error("메시지:", error.message); // 에러 메시지
+  }
+}
+
+// 메모 생성
+export async function createMemo(formData) {
+  try {
+    const response = await fetch("/api/memo", {
+      method: "PUT",
+      body: FormData,
+    });
     if (!response.ok) {
       const errorData = await response.json();
       throw errorData;

@@ -71,7 +71,8 @@ function Header() {
 
   return (
     <div className="header">
-      {currentUser ? (
+      {/* 로그인 기능 숨김 */}
+      {/* {currentUser ? (
         <>
           <div className="mypage-icons">
             <div onClick={goMypage}>
@@ -87,7 +88,7 @@ function Header() {
         <div className="h-login" onClick={goLogin}>
           로그인
         </div>
-      )}
+      )} */}
 
       <div className="title" onClick={goToHome}>
         모락 (모두의 낙서)
