@@ -1,6 +1,10 @@
 // 메인에 표출되는 메모리스트 조회
-export async function getMainMemos() {
-  const response = await fetch("/api/memo/main");
+export async function getMainMemos({ keyword }) {
+  // 검색키워드가 있는 경우
+  const params = new URLSearchParams();
+  if (keyword) params.append("keyword", keyword);
+
+  const response = await fetch(`/api/memo/main?${params.toString()}`);
 
   if (!response.ok) {
     const errorData = await response.json();
