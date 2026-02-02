@@ -53,6 +53,11 @@ function Home() {
           내 낙서장
         </button> */}
 
+        {/* 메모작성버튼 */}
+        <button className="add-memo" onClick={goToCreateMemo}>
+          방명록 생성
+        </button>
+
         {/* 검색창 */}
         <div>
           <SearchBox onSearch={handleSearch} />
@@ -60,11 +65,6 @@ function Home() {
 
         {/* 메모리스트 */}
         <MemoList memoList={memos} />
-
-        {/* 메모작성버튼 */}
-        <button className="add-memo" onClick={goToCreateMemo}>
-          낙서하기
-        </button>
       </div>
     </div>
   );

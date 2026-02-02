@@ -1,0 +1,17 @@
+Button {
+  padding: 10px;
+  background-color: #4d3e00;
+  border-radius: 8px;
+  height: 50px;
+  border: none;
+  color: white;
+}
+
+.add-memo {
+  padding: 10px;
+  background-color: #4d3e00;
+  border-radius: 8px;
+  height: 50px;
+  border: none;
+  color: white;
+}

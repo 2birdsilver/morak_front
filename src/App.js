@@ -15,6 +15,8 @@ import "../src/css/Print.css";
 import "../src/css/Login.css";
 import "../src/css/Mypage.css";
 import "../src/css/Comment.css";
+import "../src/css/Search.css";
+import "../src/css/Button.css";
 
 // page
 import Home from "./pages/Home";

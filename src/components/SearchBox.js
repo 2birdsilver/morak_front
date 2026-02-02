@@ -14,8 +14,9 @@ function SearchBox({ onSearch }) {
   };
 
   return (
-    <div style={{ display: "flex", gap: "8px" }}>
+    <div className="search-container" style={{ display: "flex", gap: "8px" }}>
       <input
+        className="search-input"
         type="text"
         value={keyword}
         placeholder="검색어를 입력하세요"
