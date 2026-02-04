@@ -69,6 +69,12 @@ function Header() {
     window.location.href = "/";
   };
 
+  // 메모 작성 페이지로 이동하는 함수
+  const goToCreateMemo = () => {
+    console.log("goToCreateMemo");
+    navigate(`/memo/create`);
+  };
+
   return (
     <div className="header">
       {/* 로그인 기능 숨김 */}
@@ -90,10 +96,19 @@ function Header() {
         </div>
       )} */}
 
-      <div className="title" onClick={goToHome}>
-        모락 (모두의 낙서)
+      {/* 메모작성버튼 */}
+      <button className="add-memo" onClick={goToCreateMemo}>
+        방명록 생성
+      </button>
+
+      <div>
+        <div className="title" onClick={goToHome}>
+          모락 (모두의 낙서)
+        </div>
+        <div className="text">자유롭게 메모를 남겨보세요!</div>
       </div>
-      <div className="text">자유롭게 메모를 남겨보세요!</div>
+
+      <div></div>
     </div>
   );
 }

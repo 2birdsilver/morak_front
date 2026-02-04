@@ -19,7 +19,7 @@ function SearchBox({ onSearch }) {
         className="search-input"
         type="text"
         value={keyword}
-        placeholder="검색어를 입력하세요"
+        placeholder="　검색어를 입력하세요"
         onChange={(e) => setKeyword(e.target.value)}
         onKeyDown={handleKeyDown}
       />

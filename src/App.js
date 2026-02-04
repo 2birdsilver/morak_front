@@ -20,7 +20,7 @@ import "../src/css/Button.css";
 
 // page
 import Home from "./pages/Home";
-import Memo from "./pages/MemoList";
+import Memo from "./components/MemoList";
 import Print from "./pages/Print";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -30,7 +30,6 @@ import { AuthProvider } from "./components/AuthContext";
 import Logout from "./components/Logout";
 import MemoForm from "./pages/MemoForm";
 import MemoDetail from "./pages/MemoDetail";
-import Memopad from "./pages/Memopad";
 import SignupForm from "./pages/SignupForm";
 
 function App() {
@@ -49,7 +48,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/memo/create" element={<MemoForm />} />
-          <Route path="/memopad/:memopadId" element={<Memopad />} />
           <Route path="/signup" element={<SignupForm />} />
         </Routes>
         <Footer />
