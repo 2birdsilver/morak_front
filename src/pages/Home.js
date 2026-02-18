@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Desk from "../components/Desk.js";
-import MemoList from "../components/MemoList.js";
 import { useNavigate } from "react-router-dom";
-import memoApi, { getMainMemos } from "../api/memoApi.js";
+import guestbookApi, { fetchMainGuestbooks } from "../api/guestbookApi.js";
 import SearchBox from "../components/SearchBox.js";
 import {
   Section,
@@ -12,37 +11,35 @@ import {
 
 function Home() {
   const [members, setMembers] = useState([]);
-  const [memos, setMemos] = useState([]);
+  const [guestbooks, setguestbooks] = useState([]);
   const navigate = useNavigate();
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [sections, setSections] = useState([]);
 
-  const sections = [
-    { type: "LATEST", title: "최신순" },
-    { type: "POPULAR", title: "인기순" },
-  ];
-
-  // const goToMemos = (memo) => {
-  //   navigate(`/memo/${member.id}`);
+  // const goToguestbooks = (guestbook) => {
+  //   navigate(`/guestbook/${member.id}`);
   // };
 
+  /**
+   *
+   * 첫 로딩 시 섹션별 방명록 리스트 조회
+   */
   useEffect(() => {
-    const fetchMemos = async () => {
+    const loadData = async () => {
       try {
-        const data = await getMainMemos({
-          keyword: searchKeyword,
-        });
-        setMemos(data);
-      } catch (e) {
-        console.error(e);
+        const data = await fetchMainGuestbooks();
+        setSections(data);
+      } catch (error) {
+        console.error(error);
       }
     };
 
-    fetchMemos();
+    loadData();
   }, [searchKeyword]);
 
   // 낙서장 페이지로 이동하는 함수
-  const goToCreateMemopad = () => {
-    navigate(`/memopad/{userId}`);
+  const goToCreateguestbookpad = () => {
+    navigate(`/guestbookpad/{userId}`);
   };
 
   // 검색함수
@@ -53,7 +50,7 @@ function Home() {
   return (
     <div className="wrap">
       <div className="container">
-        {/* <button className="memopad" onClick={goToCreateMemopad}>
+        {/* <button className="guestbookpad" onClick={goToCreateguestbookpad}>
           내 낙서장
         </button> */}
 
@@ -63,15 +60,15 @@ function Home() {
         </div>
 
         {/* 방명록리스트 */}
-        <div>
-          {sections.map((section) => (
-            <Section
-              key={section.type}
-              type={section.type}
-              title={section.title}
-            />
-          ))}
-        </div>
+        {sections.map((section) => (
+          <div key={section.type}>
+            <h2>{section.type}</h2>
+
+            {section.guestbookMainPageDtoList.map((guestbook) => (
+              <div key={guestbook.id}>{guestbook.title}</div>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );
