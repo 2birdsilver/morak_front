@@ -31,6 +31,7 @@ import Logout from "./components/user/Logout";
 import MemoForm from "./pages/MemoForm";
 import MemoDetail from "./pages/MemoDetail";
 import SignupForm from "./pages/SignupForm";
+import GuestbookDetailPage from "./pages/GuestbookDetailPage";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/guestbook/:id" element={<GuestbookDetailPage />} />
           {/* <Route
           path='/intern' 
           element={<Detail />}

@@ -1,17 +1,35 @@
 import axiosInstance from "./axiosInstance";
 
+/**
+ * 메인화면의 섹션별 방명록리스트 조회
+ *
+ * @returns 섹션별(type) 방명록리스트(guestbookMainPageDtoList)의 리스트
+ *
+ */
 export const fetchMainGuestbooks = async () => {
   const response = await axiosInstance.get("/guestbook/");
   return response.data;
 };
 
 /**
+ * 방명록ID에 따른 상세보기
  *
  * @param {*} section
  * @returns guestbooks
  *
  */
-// 메인에 표출되는 방명록리스트 조회
+export const fetchGuestbookDetail = async (id) => {
+  const response = await axiosInstance.get(`/guestbook/${id}`);
+  return response.data;
+};
+
+/**
+ *메인화면의 섹션별 방명록리스트 조회
+ *
+ * @param {*} section
+ * @returns guestbooks
+ *
+ */
 export async function getguestbooksBySection({ section }) {
   // 검색키워드가 있는 경우
   const params = new URLSearchParams();
