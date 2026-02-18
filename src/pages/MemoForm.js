@@ -4,7 +4,7 @@ import axios from "axios";
 import { useAuth } from "../components/user/AuthContext";
 import styled from "styled-components";
 import TextInput from "../components/TextInput";
-import Button from "../components/Button";
+import Button from "../components/layout/Button";
 
 const Wrapper = styled.div`
   padding: 16px;

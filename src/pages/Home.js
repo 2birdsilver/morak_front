@@ -44,27 +44,25 @@ function Home() {
   };
 
   return (
-    <div className="wrap">
-      <div className="container">
-        {/* <button className="guestbookpad" onClick={goToCreateguestbookpad}>
+    <div>
+      {/* <button className="guestbookpad" onClick={goToCreateguestbookpad}>
           내 낙서장
         </button> */}
 
-        {/* 검색창 */}
-        <div>
-          <SearchBox onSearch={handleSearch} />
-        </div>
+      {/* 검색창 */}
+      <div>
+        <SearchBox onSearch={handleSearch} />
+      </div>
 
-        {/* 방명록리스트 */}
-        <div>
-          {sections.map((section) => (
-            <Section
-              key={section.type}
-              type={section.type}
-              guestbooks={section.guestbookMainPageDtoList}
-            />
-          ))}
-        </div>
+      {/* 방명록리스트 */}
+      <div>
+        {sections.map((section) => (
+          <Section
+            key={section.type}
+            type={section.type}
+            guestbooks={section.guestbookMainPageDtoList}
+          />
+        ))}
       </div>
     </div>
   );

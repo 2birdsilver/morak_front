@@ -22,8 +22,8 @@ import "../src/css/Button.css";
 import Home from "./pages/Home";
 import Memo from "./components/guestbook/MemoList";
 import Print from "./pages/Print";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
 import Login from "./pages/Login";
 import MyPage from "./pages/MyPage";
 import { AuthProvider } from "./components/user/AuthContext";
@@ -32,6 +32,7 @@ import MemoForm from "./pages/MemoForm";
 import MemoDetail from "./pages/MemoDetail";
 import SignupForm from "./pages/SignupForm";
 import GuestbookDetailPage from "./pages/GuestbookDetailPage";
+import Layout from "./components/layout/Layout";
 
 function App() {
   return (
@@ -39,18 +40,20 @@ function App() {
       <AuthProvider>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/guestbook/:id" element={<GuestbookDetailPage />} />
-          {/* <Route
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/guestbook/:id" element={<GuestbookDetailPage />} />
+            {/* <Route
           path='/intern' 
           element={<Detail />}
         /> */}
-          <Route path="/memo/:id" element={<MemoDetail />} />
-          <Route path="/print" element={<Print />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/memo/create" element={<MemoForm />} />
-          <Route path="/signup" element={<SignupForm />} />
+            <Route path="/memo/:id" element={<MemoDetail />} />
+            <Route path="/print" element={<Print />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/memo/create" element={<MemoForm />} />
+            <Route path="/signup" element={<SignupForm />} />
+          </Route>
         </Routes>
         <Footer />
       </AuthProvider>

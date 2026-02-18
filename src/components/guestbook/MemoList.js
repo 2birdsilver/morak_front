@@ -106,7 +106,7 @@ function MemoList({ memoList }) {
 
   return (
     <div className="wrap memo">
-      {memoList.map((memo) => (
+      {memoList?.map((memo) => (
         <Memo
           key={memo.id}
           memo={memo}

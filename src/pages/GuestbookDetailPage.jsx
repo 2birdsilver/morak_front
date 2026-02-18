@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchGuestbookDetail } from "../api/guestbookApi";
+import { fetchGuestbookDetail, getMemoById } from "../api/guestbookApi";
+import MemoList from "../components/guestbook/MemoList";
 
 function GuestbookDetailPage() {
   const { id } = useParams();
@@ -14,9 +15,12 @@ function GuestbookDetailPage() {
 
   return (
     <div>
-      <h1>{guestbook.title}</h1>
-      <p>{guestbook.introduction}</p>
-      <p>작성자: {guestbook.owner}</p>
+      <div>
+        <h1>{guestbook.guestbook.title}</h1>
+        <p>{guestbook.guestbook.introduction}</p>
+        <p>작성자: {guestbook.guestbook.owner}</p>
+      </div>
+      <MemoList memoList={guestbook.memos} />
     </div>
   );
 }
