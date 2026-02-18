@@ -70,9 +70,8 @@ function Header() {
   };
 
   // 메모 작성 페이지로 이동하는 함수
-  const goToCreateMemo = () => {
-    console.log("goToCreateMemo");
-    navigate(`/memo/create`);
+  const goToCreateGuestbook = () => {
+    navigate(`/guestbook/create`);
   };
 
   return (
@@ -97,7 +96,7 @@ function Header() {
       )} */}
 
       {/* 메모작성버튼 */}
-      <button className="add-memo" onClick={goToCreateMemo}>
+      <button className="add-memo" onClick={goToCreateGuestbook}>
         방명록 생성
       </button>
 

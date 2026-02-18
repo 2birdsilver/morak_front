@@ -33,6 +33,7 @@ import MemoDetail from "./pages/MemoDetail";
 import SignupForm from "./pages/SignupForm";
 import GuestbookDetailPage from "./pages/GuestbookDetailPage";
 import Layout from "./components/layout/Layout";
+import GuestbookForm from "./pages/GuestbookForm";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/guestbook/:id" element={<GuestbookDetailPage />} />
+            <Route path="/guestbook/create" element={<GuestbookForm />} />
             {/* <Route
           path='/intern' 
           element={<Detail />}
