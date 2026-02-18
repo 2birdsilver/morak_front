@@ -8,6 +8,7 @@
 
 .section {
   margin-bottom: 40px;
+  position: relative;
 }
 
 .section-title {
@@ -16,18 +17,15 @@
   font-weight: bold;
 }
 
-.card-row {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding: 20px;
+.slider-wrapper {
+  position: relative;
 }
 
 .card {
-  min-width: 200px;
+  width: 200px;
   height: 120px;
-  background-color: #1f1f1f;
-  color: white;
+  background-color: wheat;
+  color: black;
   padding: 16px;
   border-radius: 8px;
   flex-shrink: 0;
@@ -36,4 +34,50 @@
 
 .card:hover {
   transform: scale(1.05);
+}
+
+.card-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 20px 40px;
+  width: 1296px;
+}
+
+.card-row::-webkit-scrollbar {
+  display: none; /* 스크롤바 숨김 */
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 24px;
+  width: 40px;
+  height: 60px;
+  cursor: pointer;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+
+.arrow.left {
+  left: 0;
+}
+
+.arrow.right {
+  right: 0;
+}
+
+.slider-wrapper .arrow {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.slider-wrapper:hover .arrow {
+  opacity: 1;
 }
