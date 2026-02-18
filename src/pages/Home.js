@@ -2,12 +2,8 @@ import React, { useEffect, useState } from "react";
 import Desk from "../components/Desk.js";
 import { useNavigate } from "react-router-dom";
 import guestbookApi, { fetchMainGuestbooks } from "../api/guestbookApi.js";
-import SearchBox from "../components/SearchBox.js";
-import {
-  Section,
-  HorizontalGuestbookList,
-  Guestbook,
-} from "../components/Guestbook";
+import SearchBox from "../components/guestbook/SearchBox.js";
+import Section from "../components/guestbook/Section";
 
 function Home() {
   const [members, setMembers] = useState([]);
@@ -60,15 +56,15 @@ function Home() {
         </div>
 
         {/* 방명록리스트 */}
-        {sections.map((section) => (
-          <div key={section.type}>
-            <h2>{section.type}</h2>
-
-            {section.guestbookMainPageDtoList.map((guestbook) => (
-              <div key={guestbook.id}>{guestbook.title}</div>
-            ))}
-          </div>
-        ))}
+        <div>
+          {sections.map((section) => (
+            <Section
+              key={section.type}
+              type={section.type}
+              guestbooks={section.guestbookMainPageDtoList}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

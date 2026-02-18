@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAuth } from "../components/AuthContext";
+import { useAuth } from "../components/user/AuthContext";
 import styled from "styled-components";
 
 const Wrapper = styled.div`

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../components/AuthContext";
+import { useAuth } from "../components/user/AuthContext";
 import styled from "styled-components";
 import TextInput from "../components/TextInput";
 import Button from "../components/Button";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import mypage from "../images/person.png";
-import { useAuth } from "../components/AuthContext";
+import { useAuth } from "./user/AuthContext";
 
 function Header() {
   const [currentUser, setCurrentUser] = useState(null);

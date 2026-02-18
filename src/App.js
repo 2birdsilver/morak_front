@@ -20,14 +20,14 @@ import "../src/css/Button.css";
 
 // page
 import Home from "./pages/Home";
-import Memo from "./components/MemoList";
+import Memo from "./components/guestbook/MemoList";
 import Print from "./pages/Print";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import MyPage from "./pages/MyPage";
-import { AuthProvider } from "./components/AuthContext";
-import Logout from "./components/Logout";
+import { AuthProvider } from "./components/user/AuthContext";
+import Logout from "./components/user/Logout";
 import MemoForm from "./pages/MemoForm";
 import MemoDetail from "./pages/MemoDetail";
 import SignupForm from "./pages/SignupForm";
