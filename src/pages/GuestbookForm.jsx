@@ -24,6 +24,7 @@ function GuestbookForm() {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [introduction, setIntroduction] = useState("");
+  const [isSearchEnabled, setIsSearchEnabled] = useState("");
   const [shape, setShape] = useState("square");
   const [color, setColor] = useState("beige");
   const [recipient, setRecipient] = useState(false);
@@ -170,6 +171,20 @@ function GuestbookForm() {
             />
           </FormGroup>
 
+          {/* 🔹 추가: Select 박스 */}
+          <FormGroup>
+            <Label htmlFor="isSearchEnabled">검색여부</Label>
+            <SelectStyled
+              id="isSearchEnabled"
+              value={isSearchEnabled}
+              onChange={(e) => setIsSearchEnabled(e.target.value)}
+            >
+              <option value="1">전체공개</option>
+              <option value="2">비공개</option>
+              <option value="3">암호설정 (* 비밀번호 입력필수)</option>
+            </SelectStyled>
+          </FormGroup>
+
           <div>
             <Button
               title="뒤로가기"
@@ -221,4 +236,13 @@ const SubmitButton = styled.button`
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
+`;
+
+const SelectStyled = styled.select`
+  width: 600px;
+  height: 36px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid ligth-grey;
+  font-size: 14px;
 `;
